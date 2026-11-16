@@ -17,7 +17,7 @@ Kotlin and Swift, Kotlin Multiplatform, Capacitor and .NET MAUI.
 
 ```bash
 gh repo create my-testers --public --template pierridotite/mobile-agent-testers --clone
-cd my-testers && ./setup.sh           # key pair + secrets + Claude token
+cd my-testers && ./setup.sh           # key pair + secrets + Claude token (Windows: .\setup.ps1)
 gh workflow run agent-testers.yml     # demo: 2 Android + 2 iOS testers, ~30 min
 bash scripts/collect.sh <run id>      # decrypts reports into runs/<id>/SUMMARY.md
 ```
