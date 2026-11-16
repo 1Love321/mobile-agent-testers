@@ -20,11 +20,11 @@ Kotlin and Swift, Kotlin Multiplatform, Capacitor and .NET MAUI.
 ```bash
 gh repo create my-testers --public --template pierridotite/mobile-agent-testers --clone
 cd my-testers && ./setup.sh           # key pair + secrets + Claude token (Windows: .\setup.ps1)
-gh workflow run agent-testers.yml     # demo: 2 Android + 2 iOS testers, ~30 min
+gh workflow run agent-testers.yml     # demo: 2 Android + 2 iOS testers, ~20 min
 bash scripts/collect.sh <run id>      # decrypts reports into runs/<id>/SUMMARY.md
 ```
 
-The demo app has [11 deliberate bugs](demo-app/BUGS.md). On the first run, the 4 demo testers found 8 of them in about 5 minutes, plus real issues nobody planted (a button under the Android nav bar, no data kept after a relaunch). Model usage: $0.72 for the 4.
+The demo app has [11 deliberate bugs](demo-app/BUGS.md). On the first run, the 4 demo testers found 8 of them (2 to 5 minutes per agent, about 20 minutes for the whole run, builds included), plus real issues nobody planted (a button under the Android nav bar, no data kept after a relaunch). Model usage: $0.78 for the 4.
 
 Or let Claude set it up for your app:
 
