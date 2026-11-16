@@ -1,9 +1,24 @@
 {
   "name": "mobile-agent-testers",
+  "displayName": "Mobile Agent Testers",
   "description": "Set up and run parallel AI testers (one Claude Code agent per iOS Simulator or Android emulator, with personas) on GitHub Actions",
   "version": "0.1.0",
-  "author": { "name": "pierridotite" },
+  "author": {
+    "name": "Pierre Raffalli",
+    "url": "https://github.com/pierridotite"
+  },
   "homepage": "https://github.com/pierridotite/mobile-agent-testers",
   "license": "MIT",
-  "keywords": ["mobile", "testing", "ios", "android", "qa", "agents", "github-actions"]
+  "keywords": [
+    "mobile",
+    "testing",
+    "ios",
+    "android",
+    "qa",
+    "agents",
+    "github-actions"
+  ],
+  "repository": "https://github.com/pierridotite/mobile-agent-testers",
+  "supportUrl": "https://github.com/pierridotite/mobile-agent-testers/issues",
+  "privacyPolicyUrl": "https://github.com/pierridotite/mobile-agent-testers/blob/main/PRIVACY.md"
 }
