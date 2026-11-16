@@ -7,7 +7,7 @@ emulator on GitHub Actions. It plays a persona, uses your app like a new user
 and writes a bug report with screenshots. Flutter, React Native, Expo, native
 Kotlin and Swift, Kotlin Multiplatform, Capacitor and .NET MAUI.
 
-<p align="center"><img src="assets/demo.gif" alt="Four AI testers using the demo app at the same time on a small Android phone, a Pixel 7 in dark mode, an iPhone SE in French and an iPad with the largest text size" width="100%"></p>
+<p align="center"><img src="assets/demo.gif" alt="Four AI testers use the demo app at the same time (small Android phone, Pixel 7 in dark mode, iPhone SE in French, iPad with the largest text) and each bug they find appears under its phone" width="100%"></p>
 
 [![Stars](https://img.shields.io/github/stars/pierridotite/mobile-agent-testers?style=flat)](https://github.com/pierridotite/mobile-agent-testers/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
