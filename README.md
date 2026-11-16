@@ -7,6 +7,8 @@ emulator on GitHub Actions. It plays a persona, uses your app like a new user
 and writes a bug report with screenshots. Flutter, React Native, Expo, native
 Kotlin and Swift, Kotlin Multiplatform, Capacitor and .NET MAUI.
 
+<p align="center"><img src="assets/demo.gif" alt="Four AI testers using the demo app at the same time on a small Android phone, a Pixel 7 in dark mode, an iPhone SE in French and an iPad with the largest text size" width="100%"></p>
+
 [![Stars](https://img.shields.io/github/stars/pierridotite/mobile-agent-testers?style=flat)](https://github.com/pierridotite/mobile-agent-testers/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 ![iOS + Android](https://img.shields.io/badge/platforms-iOS%20%2B%20Android-blue)
@@ -22,7 +24,7 @@ gh workflow run agent-testers.yml     # demo: 2 Android + 2 iOS testers, ~30 min
 bash scripts/collect.sh <run id>      # decrypts reports into runs/<id>/SUMMARY.md
 ```
 
-The demo app has [11 deliberate bugs](demo-app/BUGS.md). See how many the agents find.
+The demo app has [11 deliberate bugs](demo-app/BUGS.md). On the first run, the 4 demo testers found 8 of them in about 5 minutes, plus real issues nobody planted (a button under the Android nav bar, no data kept after a relaunch). Model usage: $0.72 for the 4.
 
 Or let Claude set it up for your app:
 
