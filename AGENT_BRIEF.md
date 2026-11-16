@@ -22,7 +22,7 @@ iOS
 - Never clear app data or reinstall. Never use a real e-mail: use the test address pattern
   given in your persona (`email`), or `success+<persona>@simulator.amazonses.com`.
 - If you are stuck on the same screen for 5 actions, write it down as an issue and try another path.
-- Budget: about 40-60 actions, then write the report. Stop earlier if the app crashes twice.
+- Budget: about 30 actions, then write the report. Stop earlier if the app crashes twice.
 - Write everything under `results/<persona>/`. Nothing else.
 
 ## What to check (adapt to your app)

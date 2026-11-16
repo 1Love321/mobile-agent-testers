@@ -93,6 +93,13 @@ jobs:
         with: { node-version: 20 }
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: "17" }
+      - uses: gradle/actions/setup-gradle@v4   # Gradle cache between runs
+        with: { cache-read-only: false }
+      - uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-android-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-android-
       - name: Build APK (any framework, log kept private)
         env:
           APP_DIR: ${{ inputs.source_repo != '' && format('src/{0}', inputs.app_dir) || inputs.app_dir }}
@@ -132,6 +139,13 @@ jobs:
         with: { distribution: temurin, java-version: "17" }
       - name: Latest Xcode
         run: sudo xcode-select -s "$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)"
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            ~/Library/Caches/CocoaPods
+          key: npm-pods-ios-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-pods-ios-
       - name: Build Simulator .app (any framework, arm64, unsigned, log kept private)
         env:
           APP_DIR: ${{ inputs.source_repo != '' && format('src/{0}', inputs.app_dir) || inputs.app_dir }}
