@@ -89,4 +89,4 @@ toolkit works. Labelled widgets (Flutter `Semantics`, `contentDescription`,
 [AXe](https://github.com/cameroncooke/axe) ·
 [android-emulator-runner](https://github.com/ReactiveCircus/android-emulator-runner)
 
-Made by [@pierridotite](https://github.com/pierridotite) · MIT license
+Made by [@pierridotite](https://github.com/pierridotite) ([LinkedIn](https://www.linkedin.com/in/pierre-raffalli/)) · MIT license
