@@ -50,7 +50,7 @@ bundled Tiny Todo app, which has 11 deliberate bugs listed in
 
 ## 3. Point it at the user's app
 
-Read the app to fill the workflow inputs (pass them with `-f` or change the
+Read the app to fill the workflow inputs (give them with `-f` or change the
 defaults in `.github/workflows/agent-testers.yml`):
 
 | Input | How to find it |
@@ -68,7 +68,7 @@ The build detects the framework (`scripts/build/detect.sh`): Flutter, Expo,
 React Native, Capacitor/Ionic, Kotlin Multiplatform, native Kotlin/Java and
 Swift/Objective-C, .NET MAUI (beta). Force it with `-f framework=<name>` if
 detection is wrong. For anything else, or to test an app that is already
-built, pass `android_build` + `apk_path` and `ios_build` + `ios_app_path`
+built, set `android_build` + `apk_path` and `ios_build` + `ios_app_path`
 (a build command or a download; paths relative to `app_dir`). For a native
 iOS project with several schemes, set the repo variable: `gh variable set IOS_SCHEME --body <scheme>`.
 
@@ -84,7 +84,7 @@ Adapt `AGENT_BRIEF.md` to the app: what to check, how to sign up (test
 accounts, `success+<id>@simulator.amazonses.com` for e-mails), what is out of
 scope. Keep the rules "screenshot after every action" and "write
 findings.json". For a quick targeted check, write a second, short brief and
-pass `-f brief=<file>`.
+run with `-f brief=<file>`.
 
 Add the app's analytics and ad hosts to `block_hosts` so test runs never reach
 production stats.
