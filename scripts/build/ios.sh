@@ -18,7 +18,12 @@ xcbuild() {  # $1 = folder holding the .xcworkspace / .xcodeproj
   c=$(find "$dir" -maxdepth 2 -name '*.xcworkspace' -not -path '*/Pods/*' -not -path '*.xcodeproj/*' | head -1)
   if [ -n "$c" ]; then set -- -workspace "$c"; else c=$(find "$dir" -maxdepth 2 -name '*.xcodeproj' -not -path '*/Pods/*' | head -1); set -- -project "$c"; fi
   [ -n "$c" ] || fail
-  s=${IOS_SCHEME:-$(xcodebuild "$@" -list -json 2>/dev/null | python3 -c "import json,sys;d=json.load(sys.stdin);d=d.get('workspace') or d.get('project');print(d['schemes'][0])")}
+  # Default scheme: the app's own (a workspace also lists every Pod as a scheme)
+  s=${IOS_SCHEME:-$(xcodebuild "$@" -list -json 2>/dev/null | python3 -c "import json,sys,os
+d=json.load(sys.stdin);d=d.get('workspace') or d.get('project');sc=d['schemes']
+base=os.path.splitext(os.path.basename(sys.argv[1]))[0]
+print(base if base in sc else sc[0])" "$c")}
+  echo "Scheme: $s"
   q xcodebuild "$@" -scheme "$s" -configuration "${IOS_CONFIGURATION:-Release}" -sdk iphonesimulator \
     -destination 'generic/platform=iOS Simulator' -derivedDataPath "$RUNNER_TEMP/dd" \
     EXCLUDED_ARCHS=x86_64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build || fail
