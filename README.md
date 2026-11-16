@@ -66,15 +66,7 @@ toolkit works. Labelled widgets (Flutter `Semantics`, `contentDescription`,
 
 ## How it works
 
-```mermaid
-flowchart LR
-  A[Run] --> B[Build APK]
-  A --> C[Build iOS .app]
-  B --> D[1 emulator + 1 agent<br/>per persona]
-  C --> E[1 simulator + 1 agent<br/>per persona]
-  D & E --> F[Encrypted reports]
-  F --> G[SUMMARY.md]
-```
+<p align="center"><img src="assets/how-it-works.svg" alt="How it works: one workflow builds the app, then one emulator or simulator with one agent per persona, encrypted reports, summary on your machine" width="100%"></p>
 
 - **Personas** set the device: model, OS, font size, dark mode, language, location.
 - **Three tools per agent**: see the screen (with tap coordinates), gestures, typing.
