@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { FlatList, Pressable, StyleSheet, Text, TextInput, View, useColorScheme } from 'react-native';
 
-const SEED = ['Buy apples', 'Call the plumber', 'Water the plants', 'Book the dentist'];
+const SEED = ['Buy apples', 'Call the plumber', 'Pay the rent', 'Book the dentist'];
 
 function SignUp({ onDone, dark }) {
   const [name, setName] = useState('');

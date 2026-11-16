@@ -165,7 +165,7 @@ self-hosted Mac.
 
 ## Results on a real app
 
-The first 20 runs on a production gardening app (iOS and Android) found,
+The first 20 runs on one of my production apps (iOS and Android) found,
 among others: the keyboard hiding "Continue" on small Android screens, a
 search that returned nothing for plurals, and a layout overlapping the
 3-button Android navigation bar. Average persona score 6.4/10, no crash.
