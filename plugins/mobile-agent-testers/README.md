@@ -23,8 +23,8 @@ personas for your audience and runs the first batch.
 
 Network: the workflow runs on GitHub Actions and calls the Claude API from
 there. The plugin itself only runs `gh`, `git` and the scripts of the template.
-It never reads your tokens or keys: you type them into the setup script's
-prompts in your own terminal.
+It never reads your credentials: you type them into the setup script in your
+own terminal.
 
 Template and full docs: https://github.com/pierridotite/mobile-agent-testers
 License: MIT

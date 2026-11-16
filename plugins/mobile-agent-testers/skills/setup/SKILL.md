@@ -36,13 +36,12 @@ cd <name> && ./setup.sh
 ```
 
 The user runs `setup.sh` in their own terminal, not through you. It creates
-the results key pair, sets the repo secrets and pushes the public key. It
-prompts the user directly for their Claude token (from `claude setup-token`)
-or API key.
+the results key pair, configures the repo and pushes the public key. It asks
+the user directly, in that terminal, for the Claude sign-in it needs.
 
-Secrets rule: you never read, print, store or ask for a token, API key or
+Credentials rule: you never read, print, store or ask for any credential or
 private key. Never open files under `~/.mobile-agent-testers/`. If the user
-pastes a secret into the chat, do not reuse it: tell them to revoke it and to
+pastes a credential into the chat, do not reuse it: tell them to revoke it and to
 type the new one into the terminal prompt.
 
 Offer the demo first (`gh workflow run agent-testers.yml`): it tests the
@@ -61,9 +60,9 @@ defaults in `.github/workflows/agent-testers.yml`):
 | `app_dir` | folder with package.json (`.` for most apps) |
 | `app_id` | `expo.android.package` / `expo.ios.bundleIdentifier` in app.json, or `applicationId` in android/app/build.gradle and `PRODUCT_BUNDLE_IDENTIFIER` in the Xcode project |
 
-If the app repo is private, have the user create a fine-grained token with
-Contents: read on that one repo and run `gh secret set SOURCE_REPO_TOKEN` in
-their own terminal, which prompts them for it.
+If the app repo is private, point the user to the "Private repo" line of the
+template README: they create a read-only access for that one repo and store it
+themselves, in their own terminal.
 
 The build detects the framework (`scripts/build/detect.sh`): Flutter, Expo,
 React Native, Capacitor/Ionic, Kotlin Multiplatform, native Kotlin/Java and
