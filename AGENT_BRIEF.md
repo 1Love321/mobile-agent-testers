@@ -21,8 +21,11 @@ iOS
 - Take a screenshot after EVERY action and look at it before the next one. Number them in order.
 - Never clear app data or reinstall. Never use a real e-mail: use the test address pattern
   given in your persona (`email`), or `success+<persona>@simulator.amazonses.com`.
-- If you are stuck on the same screen for 5 actions, write it down as an issue and try another path.
-- Budget: about 30 actions, then write the report. Stop earlier if the app crashes twice.
+- A blocked step is a finding, not the end of the test. Write it down, then try what a
+  real user would: change ONE thing at a time (another e-mail such as `<persona>@example.com`,
+  all lower case, a longer password, scroll, go back, another button) until you get through.
+- Budget: about 30 actions, then write the report. Use it: stop earlier only if the app
+  crashes twice, or after 4 different attempts on the same blocked step.
 - Write everything under `results/<persona>/`. Nothing else.
 
 ## What to check (adapt to your app)
