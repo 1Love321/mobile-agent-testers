@@ -4,7 +4,8 @@
 
 Each tester is a Claude Code agent with its own iOS Simulator or Android
 emulator on GitHub Actions. It plays a persona, uses your app like a new user
-and writes a bug report with screenshots.
+and writes a bug report with screenshots. Flutter, React Native, Expo, native
+Kotlin and Swift, Kotlin Multiplatform, Capacitor and .NET MAUI.
 
 [![Stars](https://img.shields.io/github/stars/pierridotite/mobile-agent-testers?style=flat)](https://github.com/pierridotite/mobile-agent-testers/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
@@ -40,12 +41,28 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 | Input | |
 |---|---|
 | `source_repo`, `ref` | App repo and branch (empty = this repo). Private repo: add a read-only `SOURCE_REPO_TOKEN` secret |
-| `app_dir`, `app_id` | Folder with package.json, Android package / iOS bundle id |
+| `app_dir`, `app_id` | App folder, Android package / iOS bundle id |
 | `android_personas`, `ios_personas` | Ids from [personas.json](personas.json), one phone each |
 | `brief` | Agent instructions ([AGENT_BRIEF.md](AGENT_BRIEF.md)) |
+| `framework` | `auto` (default) or force one of the frameworks below |
+| `android_build` + `apk_path`, `ios_build` + `ios_app_path` | Your own build command, or a download of a prebuilt app (paths relative to `app_dir`) |
 | `block_hosts` | Analytics hosts blocked during tests |
 
-Works with Expo and React Native. For native or Flutter, change the two build steps.
+**Supported out of the box** (detected automatically):
+
+| Framework | Android | iOS Simulator |
+|---|---|---|
+| Flutter | `flutter build apk` | `flutter build ios --simulator` |
+| React Native / Expo | Gradle release | Xcode, arm64 |
+| Native Kotlin / Java, Swift / Objective-C | Gradle debug | Xcode, arm64 |
+| Kotlin Multiplatform | Gradle debug | Xcode project of the iOS app |
+| Capacitor / Ionic | Gradle debug after `cap sync` | Xcode after `cap sync` |
+| .NET MAUI (beta) | `dotnet publish` | `dotnet build` for `iossimulator-arm64` |
+| Anything else | `android_build` + `apk_path` | `ios_build` + `ios_app_path` |
+
+Agents read the screen from screenshots and the accessibility tree, so any UI
+toolkit works. Labelled widgets (Flutter `Semantics`, `contentDescription`,
+`accessibilityLabel`) give them more precise tap targets.
 
 ## How it works
 

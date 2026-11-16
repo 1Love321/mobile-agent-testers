@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Set up and run parallel AI testers for an iOS/Android app - one headless Claude Code agent per iOS Simulator or Android emulator, each with a persona and a different device, on GitHub Actions, with encrypted reports.
+description: Set up and run parallel AI testers for an iOS/Android app (Flutter, React Native, Expo, native, KMP, Capacitor, MAUI) - one headless Claude Code agent per iOS Simulator or Android emulator, each with a persona and a different device, on GitHub Actions, with encrypted reports.
 ---
 
 # Set up mobile agent testers
@@ -61,9 +61,13 @@ If the app repo is private, have the user create a fine-grained token with
 Contents: read on that one repo and store it with
 `gh secret set SOURCE_REPO_TOKEN`.
 
-The build handles Expo (prebuild) and bare React Native. For a native
-Android/iOS app or Flutter, adapt the two build steps so they output
-`app.apk` and a zipped Simulator `.app`.
+The build detects the framework (`scripts/build/detect.sh`): Flutter, Expo,
+React Native, Capacitor/Ionic, Kotlin Multiplatform, native Kotlin/Java and
+Swift/Objective-C, .NET MAUI (beta). Force it with `-f framework=<name>` if
+detection is wrong. For anything else, or to test an app that is already
+built, pass `android_build` + `apk_path` and `ios_build` + `ios_app_path`
+(a build command or a download; paths relative to `app_dir`). For a native
+iOS project with several schemes, set the repo variable: `gh variable set IOS_SCHEME --body <scheme>`.
 
 ## 4. Personas and brief
 
