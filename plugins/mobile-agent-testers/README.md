@@ -27,4 +27,5 @@ It never reads your credentials: you type them into the setup script in your
 own terminal.
 
 Template and full docs: https://github.com/pierridotite/mobile-agent-testers
+Made by Pierre Raffalli: [GitHub](https://github.com/pierridotite) · [LinkedIn](https://www.linkedin.com/in/pierre-raffalli/)
 License: MIT
