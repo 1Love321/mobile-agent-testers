@@ -50,6 +50,10 @@ on:
       block_hosts:
         description: Hosts the app must not reach during tests (analytics, ads), space-separated
         default: "app.posthog.com eu.i.posthog.com us.i.posthog.com graph.facebook.com api.mixpanel.com api2.amplitude.com"
+      record_video:
+        description: Record each phone's screen (encrypted with the results)
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -221,6 +225,7 @@ jobs:
           BRIEF: ${{ inputs.brief }}
           MODEL: ${{ inputs.model }}
           BLOCK_HOSTS: ${{ inputs.block_hosts }}
+          RECORD_VIDEO: ${{ inputs.record_video }}
         with:
           api-level: ${{ matrix.api }}
           target: google_apis
@@ -312,6 +317,7 @@ jobs:
           BRIEF: ${{ inputs.brief }}
           MODEL: ${{ inputs.model }}
           BLOCK_HOSTS: ${{ inputs.block_hosts }}
+          RECORD_VIDEO: ${{ inputs.record_video }}
         run: bash scripts/ios/run_agent.sh
 
       - name: Encrypt results
