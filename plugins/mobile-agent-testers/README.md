@@ -10,12 +10,21 @@ into one summary on your machine.
 Works with Flutter, React Native, Expo, native Kotlin and Swift, Kotlin
 Multiplatform, Capacitor and .NET MAUI, or any app you can build yourself.
 
-Ask Claude: "set up mobile agent testers for my app". The `setup` skill
+Install:
+
+```
+/plugin marketplace add pierridotite/mobile-agent-testers
+/plugin install mobile-agent-testers@mobile-agent-testers
+```
+
+Then ask Claude: "set up mobile agent testers for my app". The `setup` skill
 creates the testers repo from the template, points it at your app, writes
 personas for your audience and runs the first batch.
 
 Network: the workflow runs on GitHub Actions and calls the Claude API from
 there. The plugin itself only runs `gh`, `git` and the scripts of the template.
+It never reads your tokens or keys: you type them into the setup script's
+prompts in your own terminal.
 
 Template and full docs: https://github.com/pierridotite/mobile-agent-testers
 License: MIT

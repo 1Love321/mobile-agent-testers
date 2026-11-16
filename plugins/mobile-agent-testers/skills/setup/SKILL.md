@@ -21,7 +21,7 @@ Template and full docs: https://github.com/pierridotite/mobile-agent-testers
   Fine: open-source app, or testers inside the app's own repo. Grey zone:
   pulling a closed-source app into a public repo only to get free Macs. Say
   so, and offer the private-repo or self-hosted alternative.
-- A Claude Pro/Max subscription token can be used up quickly: 20 agents at
+- A Claude Pro/Max subscription can be used up quickly: 20 agents at
   once used a 5-hour window in about 15 minutes. Recommend batches of 6-10.
 - Logs of a public repo are public. The template encrypts build logs, apps,
   screenshots and reports. Never add a step that prints them.
@@ -35,11 +35,15 @@ gh repo create <name> --public --template pierridotite/mobile-agent-testers --cl
 cd <name> && ./setup.sh
 ```
 
-`setup.sh` creates the results key pair (private half in
-`~/.mobile-agent-testers/`), sets `ARTIFACT_PASSPHRASE`, asks for
-`CLAUDE_CODE_OAUTH_TOKEN` (from `claude setup-token`) or `ANTHROPIC_API_KEY`,
-and pushes the public key. Never ask the user to paste a token into the chat:
-they type it into setup.sh.
+The user runs `setup.sh` in their own terminal, not through you. It creates
+the results key pair, sets the repo secrets and pushes the public key. It
+prompts the user directly for their Claude token (from `claude setup-token`)
+or API key.
+
+Secrets rule: you never read, print, store or ask for a token, API key or
+private key. Never open files under `~/.mobile-agent-testers/`. If the user
+pastes a secret into the chat, do not reuse it: tell them to revoke it and to
+type the new one into the terminal prompt.
 
 Offer the demo first (`gh workflow run agent-testers.yml`): it tests the
 bundled Tiny Todo app, which has 11 deliberate bugs listed in
@@ -58,8 +62,8 @@ defaults in `.github/workflows/agent-testers.yml`):
 | `app_id` | `expo.android.package` / `expo.ios.bundleIdentifier` in app.json, or `applicationId` in android/app/build.gradle and `PRODUCT_BUNDLE_IDENTIFIER` in the Xcode project |
 
 If the app repo is private, have the user create a fine-grained token with
-Contents: read on that one repo and store it with
-`gh secret set SOURCE_REPO_TOKEN`.
+Contents: read on that one repo and run `gh secret set SOURCE_REPO_TOKEN` in
+their own terminal, which prompts them for it.
 
 The build detects the framework (`scripts/build/detect.sh`): Flutter, Expo,
 React Native, Capacitor/Ionic, Kotlin Multiplatform, native Kotlin/Java and
@@ -90,10 +94,16 @@ production stats.
 
 ```bash
 gh workflow run agent-testers.yml -f android_personas=a,b -f ios_personas=c,d -f app_id=com.example.app
+```
+
+When the run ends, the user decrypts the results in their own terminal (the
+private key stays with them):
+
+```bash
 bash scripts/collect.sh <run id>      # downloads + decrypts into runs/<id>/
 ```
 
-Read `runs/<id>/SUMMARY.md`, then open the screenshots of each important
+Then read `runs/<id>/SUMMARY.md`, then open the screenshots of each important
 issue before you trust it: agents sometimes misread a screen. Check that no
 agent stopped on a usage limit (collect.sh warns). Turn confirmed issues into
 fixes or tickets, most severe first, and say which personas hit each one.
