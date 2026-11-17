@@ -43,7 +43,7 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 | Input | |
 |---|---|
 | `source_repo`, `ref` | App repo and branch (empty = this repo). Private repo: add a read-only `SOURCE_REPO_TOKEN` secret |
-| `app_dir`, `app_id` | App folder, Android package / iOS bundle id |
+| `app_dir`, `app_id` | App folder, Android package / iOS bundle id (if the other platform uses another id, it is read from its built app) |
 | `android_personas`, `ios_personas` | Ids from [personas.json](personas.json), one phone each |
 | `brief` | Agent instructions ([AGENT_BRIEF.md](AGENT_BRIEF.md)) |
 | `framework` | `auto` (default) or force one of the frameworks below |

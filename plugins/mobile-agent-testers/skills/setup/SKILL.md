@@ -58,7 +58,7 @@ defaults in `.github/workflows/agent-testers.yml`):
 | `source_repo` | owner/name of the app repo (empty if the app is in the testers repo) |
 | `ref` | branch or full SHA to test |
 | `app_dir` | folder with package.json (`.` for most apps) |
-| `app_id` | `expo.android.package` / `expo.ios.bundleIdentifier` in app.json, or `applicationId` in android/app/build.gradle and `PRODUCT_BUNDLE_IDENTIFIER` in the Xcode project |
+| `app_id` | `expo.android.package` in app.json, or `applicationId` in android/app/build.gradle. One id is enough: if the iOS bundle id differs, it is read from the built app |
 
 If the app repo is private, point the user to the "Private repo" line of the
 template README: they create a read-only access for that one repo and store it

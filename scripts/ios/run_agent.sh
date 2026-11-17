@@ -10,7 +10,13 @@ done
 xcrun simctl ui "$UDID" appearance "${THEME:-light}"
 xcrun simctl ui "$UDID" content_size "${TEXT_SIZE:-large}"
 xcrun simctl location "$UDID" set "$GEO" 2>/dev/null || true
-xcrun simctl install "$UDID" "$(find app -maxdepth 2 -name '*.app' -type d | head -1)" || { echo "install failed"; exit 1; }
+APP=$(find app -maxdepth 2 -name '*.app' -type d | head -1)
+xcrun simctl install "$UDID" "$APP" || { echo "install failed"; exit 1; }
+# The bundle id inside the app wins: it often differs from the Android package
+# (a new Flutter app is com.example.myApp on iOS, com.example.my_app on Android)
+BID=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$APP/Info.plist" 2>/dev/null)
+if [ -n "$BID" ] && [ "$BID" != "$APP_ID" ]; then echo "Bundle id read from the app (differs from app_id)"; APP_ID=$BID; fi
+export APP_ID
 xcrun simctl launch "$UDID" "$APP_ID"; sleep 8
 # First capture stores the screen width in points for gesture.sh
 python3 scripts/ios/screen.py "$RUNNER_TEMP/warmup" 00 >/dev/null 2>&1 || true
