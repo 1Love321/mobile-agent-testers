@@ -1,12 +1,14 @@
 """Builds the job matrix: one row per requested persona, with its device.
-Env: PERSONAS (comma-separated ids, or "all" for every persona of the platform), PLATFORM (android | ios).
+Env: PERSONAS (comma-separated ids, "all" for every persona of the platform, "none" or empty to skip it), PLATFORM (android | ios).
 Prints <platform>=<json> for $GITHUB_OUTPUT."""
 import json, os
 
 platform = os.environ.get("PLATFORM", "android")
 wanted = [p.strip() for p in os.environ.get("PERSONAS", "").split(",") if p.strip()]
 personas = {p["id"]: p for p in json.load(open("personas.json", encoding="utf-8"))}
-if wanted == ["all"]:
+if wanted == ["none"]:
+    wanted = []
+elif wanted == ["all"]:
     wanted = [pid for pid, p in personas.items() if p.get("platform") == platform]
 missing = [p for p in wanted if p not in personas]
 if missing:

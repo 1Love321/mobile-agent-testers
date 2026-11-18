@@ -99,7 +99,7 @@ gh workflow run agent-testers.yml -f android_personas=a,b -f ios_personas=c,d -f
 ```
 
 `-f android_personas=all -f ios_personas=all` runs the 20 personas (10 iOS
-jobs run 5 at a time on the Free plan).
+jobs run 5 at a time on the Free plan), and `none` skips a platform.
 
 When the run ends, the user decrypts the results in their own terminal (the
 private key stays with them):
