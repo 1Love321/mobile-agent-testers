@@ -19,11 +19,10 @@ else case "$FW" in
   flutter)
     . "$ROOT/scripts/build/flutter_sdk.sh"; flutter_sdk || fail
     q flutter pub get || fail
-    # A release signing config that needs a key the repo does not ship fails: then build debug
-    if q flutter build apk --release --target-platform android-x64; then OUT=build/app/outputs/flutter-apk/app-release.apk
-    else echo "Release build failed (often a missing signing key): building debug"
-      q flutter build apk --debug --target-platform android-x64 || fail; OUT=build/app/outputs/flutter-apk/app-debug.apk
-    fi ;;
+    # Debug, like the iOS Simulator build: no signing key needed, a faster build,
+    # and Flutter draws its overflow warnings on screen, where the agents see them
+    q flutter build apk --debug --target-platform android-x64 || fail
+    OUT=$(ls build/app/outputs/flutter-apk/*debug*.apk 2>/dev/null | head -1) ;;
   expo)
     npm_install; q env CI=1 npx expo prebuild --platform android --no-install || fail
     (cd android && q ./gradlew assembleRelease -PreactNativeArchitectures=x86_64 --build-cache) || fail; OUT=$(apk android release) ;;

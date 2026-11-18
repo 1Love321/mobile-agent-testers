@@ -80,7 +80,7 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 
 | Framework | Android | iOS Simulator |
 |---|---|---|
-| Flutter | `flutter build apk` | `flutter build ios --simulator` |
+| Flutter | `flutter build apk --debug` | `flutter build ios --simulator` |
 | React Native / Expo | Gradle release | Xcode, arm64 |
 | Native Kotlin / Java, Swift / Objective-C | Gradle debug | Xcode, arm64 |
 | Kotlin Multiplatform | Gradle debug | Xcode project of the iOS app |
@@ -104,7 +104,7 @@ toolkit works. Labelled widgets (Flutter `Semantics`, `contentDescription`,
 ## Limits
 
 - GitHub runners are free for public repos: about 20 jobs at once, 5 on macOS.
-- 20 agents can use a Claude subscription's 5-hour window in ~15 min: run batches of 6-10.
+- On plans with a 5-hour usage limit, 20 agents can use it up in ~15 min: run batches of 6-10.
 - Hosted runners are meant for the repo's own project. For a closed-source app, run the workflow in your private repo or on your own Mac.
 
 ## Star history
