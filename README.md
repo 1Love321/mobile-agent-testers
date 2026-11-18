@@ -2,10 +2,11 @@
 
 **20 AI testers on 20 different phones, in parallel, for $0.**
 
-Each tester is a Claude Code agent with its own iOS Simulator or Android
-emulator on GitHub Actions. It plays a persona, uses your app like a new user
-and writes a bug report with screenshots. Flutter, React Native, Expo, native
-Kotlin and Swift, Kotlin Multiplatform, Capacitor and .NET MAUI.
+No test scripts to write. Each tester is a Claude Code agent with its own iOS
+Simulator or Android emulator on GitHub Actions. It plays a persona (iPhone SE
+in French, Android with 130% text, iPad in dark mode...), uses your app like a
+new user and writes a bug report with screenshots. Flutter, React Native, Expo,
+native Kotlin and Swift, Kotlin Multiplatform, Capacitor and .NET MAUI.
 
 <p align="center"><img src="assets/demo.gif" alt="Real screen recordings of four AI testers using the demo app at the same time (small Android phone, Pixel 7 in dark mode, iPhone SE in French, iPad with the largest text), with each bug they find shown under its phone" width="100%"></p>
 
@@ -14,6 +15,14 @@ Kotlin and Swift, Kotlin Multiplatform, Capacitor and .NET MAUI.
 ![iOS + Android](https://img.shields.io/badge/platforms-iOS%20%2B%20Android-blue)
 ![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-orange)
 [![Last commit](https://img.shields.io/github/last-commit/pierridotite/mobile-agent-testers)](https://github.com/pierridotite/mobile-agent-testers/commits/main)
+
+## Real findings
+
+<p align="center"><img src="assets/real-finding-flutter.png" alt="Two phones on the same screen of Flutter's animations example app, a Pixel 7 and an iPhone SE in French, with the title Streamling your courses circled: both agents reported this typo on their own" width="100%"></p>
+
+- **Flutter's official animations sample** ([flutter/packages](https://github.com/flutter/packages/tree/main/packages/animations/example)): an agent on a Pixel 7 and another on an iPhone SE in French each reported the same typo, "Streamling your courses" ([line 110](https://github.com/flutter/packages/blob/main/packages/animations/example/lib/shared_axis_transition.dart#L110)), and the Android one noticed the app ignores dark mode. 19 minutes, $0.47 of model usage.
+
+Ran it on your app? [Share what it found](https://github.com/pierridotite/mobile-agent-testers/issues/new?title=Finding:%20) and it goes in this list.
 
 ## Quick start
 
@@ -32,6 +41,18 @@ Or let Claude set it up for your app:
 /plugin marketplace add pierridotite/mobile-agent-testers
 /plugin install mobile-agent-testers@mobile-agent-testers
 ```
+
+## Why not Maestro, Appium or agent-device?
+
+They run the tests you write. These agents look for what nobody thought to test.
+
+| | mobile-agent-testers | Maestro, Appium, Detox, e2e |
+|---|---|---|
+| You write | Nothing: pick personas from the list | Flows or test code |
+| It catches | Layout at large text, dark mode, confusing copy, dead ends | What each test checks |
+| Same result every run | No: each run explores, so check the screenshots | Yes |
+
+[agent-device](https://github.com/callstackincubator/agent-device) gives one coding agent hands on one simulator. This runs a whole session: it builds the app, gives each persona its own device and collects encrypted reports. Use agents before a release, and scripted flows for regressions.
 
 ## Test your own app
 
