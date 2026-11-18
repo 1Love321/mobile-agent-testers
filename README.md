@@ -18,6 +18,10 @@ native Kotlin and Swift, Kotlin Multiplatform, Capacitor and .NET MAUI.
 
 ## Real findings
 
+<p align="center"><img src="assets/real-finding-localsend.png" alt="Three LocalSend screens with Flutter's overflow stripes: an iPhone SE in French where a row overflows by 28 pixels and hides a checkbox, an iPad in German where the Send buttons cut their labels in half, and a small Android phone where the address dialog overflows by 20 pixels" width="100%"></p>
+
+- **[LocalSend](https://github.com/localsend/localsend)** (100k stars, Flutter): one agent per device. On an iPhone SE in French at the default text size, "Recevoir via un lien" overflows by 28 px and hides a checkbox, and the History screen cuts off its "Supprimer l'historique" button. On an iPad with large accessibility text, the Send buttons cut their labels in half and "Hinzufügen" runs off screen. On a small Android phone at 130% text, the address dialog overflows. The Pixel 7 agent got a raw `RsHttpClientError` message after a failed send. 23 issues in all, 27 minutes from start to reports (most of it building the app), $0.92 of model usage.
+
 <p align="center"><img src="assets/real-finding-flutter.png" alt="Two phones on the same screen of Flutter's animations example app, a Pixel 7 and an iPhone SE in French, with the title Streamling your courses circled: both agents reported this typo on their own" width="100%"></p>
 
 - **Flutter's official animations sample** ([flutter/packages](https://github.com/flutter/packages/tree/main/packages/animations/example)): an agent on a Pixel 7 and another on an iPhone SE in French each reported the same typo, "Streamling your courses" ([line 110](https://github.com/flutter/packages/blob/main/packages/animations/example/lib/shared_axis_transition.dart#L110)), and the Android one noticed the app ignores dark mode. 19 minutes, $0.47 of model usage.
