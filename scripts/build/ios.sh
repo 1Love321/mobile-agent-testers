@@ -34,9 +34,7 @@ if [ -n "${BUILD_COMMAND:-}" ]; then
   FW=custom; q bash -c "$BUILD_COMMAND" || fail; OUT=${ARTIFACT:?ARTIFACT (path of the .app) is required with BUILD_COMMAND}
 else case "$FW" in
   flutter)
-    if ! command -v flutter >/dev/null; then
-      q git clone --depth 1 -b stable https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"; export PATH="$RUNNER_TEMP/flutter/bin:$PATH"
-    fi
+    . "$ROOT/scripts/build/flutter_sdk.sh"; flutter_sdk || fail
     # Flutter only builds debug for the Simulator; it runs standalone there
     q flutter pub get && q flutter build ios --simulator --debug || fail
     OUT=$(find build/ios/iphonesimulator -maxdepth 1 -name '*.app' | head -1) ;;
