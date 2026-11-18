@@ -24,6 +24,8 @@ iOS
 - A blocked step is a finding, not the end of the test. Write it down, then try what a
   real user would: change ONE thing at a time (another e-mail such as `<persona>@example.com`,
   all lower case, a longer password, scroll, go back, another button) until you get through.
+- Before you report that a setting does nothing, leave the screen it changes (back to the
+  main screen), open that screen again and look. Many apps read settings only when a screen opens.
 - Budget: about 30 actions, then write the report. Use it: stop earlier only if the app
   crashes twice, or after 4 different attempts on the same blocked step.
 - Write everything under `results/<persona>/`. Nothing else.
