@@ -39,7 +39,7 @@ Multiplatform, Capacitor and .NET MAUI.
 <p align="center"><img src="assets/real-findings-ankidroid.png" alt="Four AnkiDroid screens, each problem boxed in red: a Pixel 7 at 200% text where the Again, Hard, Good and Easy buttons are cut in half (shown magnified), the same phone's Statistics page where the lines run off the right edge, and the welcome screen in Portuguese and in Japanese where the Get started button is still in English" width="100%"></p>
 
 - **[AnkiDroid](https://github.com/ankidroid/Anki-Android)** (12k stars, Kotlin), 10 agents on 10 Android emulators, straight from the APK of their GitHub release, no build:
-  - Pixel 7 at Android's 200% font: the Again / Hard / Good / Easy buttons are cut in half, and the Statistics text runs off the right edge.
+  - Pixel 7 at Android's 200% font: the Again / Hard / Good / Easy buttons are cut in half, and the Statistics text runs off the right edge. A second agent found the buttons still cut on their 2.26 alpha, in both rows when "Show large answer buttons" is on.
   - The welcome screen says "Get started" in English on devices set to Portuguese, Spanish and Japanese, while the rest of the screen is translated (three agents, each on its own).
 
   83 reports, which group into 43 distinct issues (two of them come from the outdated system WebView of the Android 10 and 11 emulator images, not from the app). Under 10 minutes from start to the last report, $4.69 of model usage for the 10. Run it yourself:
