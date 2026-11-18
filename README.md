@@ -29,7 +29,7 @@ Multiplatform, Capacitor and .NET MAUI.
   - Pixel Tablet in Spanish: the keyboard covers the address dialog's Cancel and Confirm.
   - A failed manual send says only "Error", "Erreur", "Fehler", "エラー", "Hata" or "Erro", with no reason. On iOS, an address that doesn't answer leaves the dialog waiting with no progress shown (three agents).
 
-  103 issues in all (1 blocker, 15 major), 69 minutes from start to the last report (the Free plan runs 5 macOS jobs at a time), $4.62 of model usage for the 20. Run it yourself:
+  103 reports in all (1 blocker, 15 major), which group into 46 distinct bugs: 29 of them, the blocker included, were found by a single persona. 69 minutes from start to the last report (the Free plan runs 5 macOS jobs at a time), $4.62 of model usage for the 20. Run it yourself:
 
   ```bash
   gh workflow run agent-testers.yml -f source_repo=localsend/localsend -f app_dir=app \
@@ -48,7 +48,7 @@ Ran it on your app? [Share what it found](https://github.com/pierridotite/mobile
 gh repo create my-testers --public --template pierridotite/mobile-agent-testers --clone
 cd my-testers && ./setup.sh           # key pair + secrets + Claude token (Windows: .\setup.ps1)
 gh workflow run agent-testers.yml     # demo: 2 Android + 2 iOS testers, ~20 min
-bash scripts/collect.sh <run id>      # decrypts reports into runs/<id>/SUMMARY.md
+bash scripts/collect.sh <run id>      # decrypts reports, groups duplicates: runs/<id>/SUMMARY.md
 ```
 
 The demo app has [11 deliberate bugs](demo-app/BUGS.md). On the recorded run above, the 4 demo testers found 9 of them (2 to 7 minutes per agent, about 21 minutes for the whole run, builds included), plus real issues nobody planted (a button under the Android nav bar, no data kept after a relaunch). Model usage: $0.87 for the 4.
@@ -114,6 +114,7 @@ toolkit works. Labelled widgets (Flutter `Semantics`, `contentDescription`,
 - **Three tools per agent**: see the screen (with tap coordinates), gestures, typing.
 - **Encrypted results**: public repo logs are public, so everything is encrypted with your key.
 - **Analytics blocked** inside the phones, so tests never touch your real stats.
+- **One summary** on your machine: Claude groups the reports that describe the same bug, so you see how many personas hit each one and which personas found which kind of issue.
 
 ## Limits
 

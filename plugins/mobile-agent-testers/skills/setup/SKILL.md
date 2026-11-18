@@ -108,7 +108,9 @@ private key stays with them):
 bash scripts/collect.sh <run id>      # downloads + decrypts into runs/<id>/
 ```
 
-Then read `runs/<id>/SUMMARY.md`, then open the screenshots of each important
-issue before you trust it: agents sometimes misread a screen. Check that no
-agent stopped on a usage limit (collect.sh warns). Turn confirmed issues into
-fixes or tickets, most severe first, and say which personas hit each one.
+Then read `runs/<id>/SUMMARY.md` (if the `claude` CLI is installed, reports that
+describe the same bug are grouped, with how many personas hit each one), then
+open the screenshots of each important issue before you trust it: agents
+sometimes misread a screen. Check that no agent stopped on a usage limit
+(collect.sh warns). Turn confirmed issues into fixes or tickets, most severe
+first, and say which personas hit each one.
