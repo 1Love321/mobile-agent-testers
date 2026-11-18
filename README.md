@@ -8,7 +8,7 @@ in French, Android with 130% text, iPad in dark mode...), uses your app like a
 new user and writes a bug report with screenshots. Flutter, React Native, Expo,
 native Kotlin and Swift, Kotlin Multiplatform, Capacitor and .NET MAUI.
 
-<p align="center"><img src="assets/demo.gif" alt="Real screen recordings of four AI testers using the demo app at the same time (small Android phone, Pixel 7 in dark mode, iPhone SE in French, iPad with the largest text), with each bug they find shown under its phone" width="100%"></p>
+<p align="center"><a href="assets/localsend-demo.mp4"><img src="assets/localsend-demo.gif" alt="Real screen recordings of four AI testers using LocalSend at the same time (small Android phone at 130% text, Pixel 7 in dark mode, iPhone SE in French, iPad with large text), with each bug they find shown under its phone. Opens the video." width="100%"></a></p>
 
 [![Stars](https://img.shields.io/github/stars/pierridotite/mobile-agent-testers?style=flat)](https://github.com/pierridotite/mobile-agent-testers/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
