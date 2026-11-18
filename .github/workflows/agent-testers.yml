@@ -9,10 +9,10 @@ on:
   workflow_dispatch:
     inputs:
       android_personas:
-        description: Android personas from personas.json (comma-separated, empty = skip Android)
+        description: Android personas from personas.json (comma-separated, all = every Android persona, empty = skip Android)
         default: "anna,malik"
       ios_personas:
-        description: iOS personas from personas.json (comma-separated, empty = skip iOS)
+        description: iOS personas from personas.json (comma-separated, all = every iOS persona, empty = skip iOS)
         default: "clara,jonas"
       app_dir:
         description: App folder (where package.json is)

@@ -74,11 +74,14 @@ iOS project with several schemes, set the repo variable: `gh variable set IOS_SC
 
 ## 4. Personas and brief
 
-Rewrite `personas.json` for the app's real audience. Each persona has a
-profile, a goal, a locale, a GPS position and a device. Cover what breaks
-layouts: a small phone, an old OS (Android API 30), a tablet, font scale 1.3
-or an accessibility text size, dark mode, another language, someone who
-refuses permissions.
+`personas.json` ships 20 personas (10 Android, 10 iOS) that cover what breaks
+layouts: small phones and tablets, Android 10 to 15, text from small to
+Android's 200% and iOS's largest accessibility size, dark mode, 14 languages
+including Arabic (right to left), Hindi, Japanese and Chinese, and someone who
+refuses permissions. Pick the ones that match the app's audience and markets,
+adapt their goals to the app (no "create an account" if it has none), and add
+personas for languages the app ships that are missing. Each persona has a
+profile, a goal, a locale, a GPS position and a device.
 
 Adapt `AGENT_BRIEF.md` to the app: what to check, how to sign up (test
 accounts, `success+<id>@simulator.amazonses.com` for e-mails), what is out of
@@ -94,6 +97,9 @@ production stats.
 ```bash
 gh workflow run agent-testers.yml -f android_personas=a,b -f ios_personas=c,d -f app_id=com.example.app
 ```
+
+`-f android_personas=all -f ios_personas=all` runs the 20 personas (10 iOS
+jobs run 5 at a time on the Free plan).
 
 When the run ends, the user decrypts the results in their own terminal (the
 private key stays with them):

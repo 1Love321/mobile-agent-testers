@@ -4,11 +4,12 @@
 
 No test scripts to write. Each tester is a Claude Code agent with its own iOS
 Simulator or Android emulator on GitHub Actions. It plays a persona (iPhone SE
-in French, Android with 130% text, iPad in dark mode...), uses your app like a
-new user and writes a bug report with screenshots. Flutter, React Native, Expo,
-native Kotlin and Swift, Kotlin Multiplatform, Capacitor and .NET MAUI.
+in Swedish at the largest text size, Pixel 7 at 200%, iPad in German, Arabic
+right to left...), uses your app like a new user and writes a bug report with
+screenshots. Flutter, React Native, Expo, native Kotlin and Swift, Kotlin
+Multiplatform, Capacitor and .NET MAUI.
 
-<p align="center"><a href="assets/localsend-demo.mp4"><img src="assets/localsend-demo.gif" alt="Real screen recordings of four AI testers using LocalSend at the same time (small Android phone at 130% text, Pixel 7 in dark mode, iPhone SE in French, iPad with large text), with each bug they find shown under its phone. Opens the video." width="100%"></a></p>
+<p align="center"><a href="assets/localsend-20.mp4"><img src="assets/localsend-20.gif" alt="Real screen recordings of 20 AI testers using LocalSend at the same time: 10 Android emulators and 10 iOS Simulators in 14 languages, from a small Pixel to a 13-inch iPad. When a tester finishes, its phone shows how many issues it found. Opens the video." width="100%"></a></p>
 
 [![Stars](https://img.shields.io/github/stars/pierridotite/mobile-agent-testers?style=flat)](https://github.com/pierridotite/mobile-agent-testers/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
@@ -18,9 +19,22 @@ native Kotlin and Swift, Kotlin Multiplatform, Capacitor and .NET MAUI.
 
 ## Real findings
 
-<p align="center"><img src="assets/real-finding-localsend.png" alt="Three LocalSend screens with Flutter's overflow stripes: an iPhone SE in French where a row overflows by 28 pixels and hides a checkbox, an iPad in German where the Send buttons cut their labels in half, and a small Android phone where the address dialog overflows by 20 pixels" width="100%"></p>
+<p align="center"><img src="assets/real-findings-localsend-20.png" alt="Four LocalSend screens with Flutter's overflow stripes, each boxed in red: a Pixel 7 at 200% text where all six Send buttons overflow, an iPhone SE in Swedish at the largest text size where the message dialog overflows by 149 pixels and hides the text field and Confirm, an iPad Air in German where the Add button overflows its card by 114 pixels, and an iPhone SE in French at the default text size where a row overflows by 28 pixels" width="100%"></p>
 
-- **[LocalSend](https://github.com/localsend/localsend)** (100k stars, Flutter): one agent per device. On an iPhone SE in French at the default text size, "Recevoir via un lien" overflows by 28 px and hides a checkbox, and the History screen cuts off its "Supprimer l'historique" button. On an iPad with large accessibility text, the Send buttons cut their labels in half and "Hinzufügen" runs off screen. On a small Android phone at 130% text, the address dialog overflows. The Pixel 7 agent got a raw `RsHttpClientError` message after a failed send. 23 issues in all, 27 minutes from start to reports (most of it building the app), $0.92 of model usage.
+- **[LocalSend](https://github.com/localsend/localsend)** (100k stars, Flutter), 20 agents on 20 devices in 14 languages:
+  - iPhone SE in Swedish at iOS's largest text size: the message dialog overflows by 149 px, so the text field and Confirm are off screen and you can't send text at all.
+  - Pixel 7 at Android's 200% font: all six Send buttons overflow and cut their labels in half. Same on an iPhone 16 Plus in Italian at the first accessibility size.
+  - iPad Air in German with large text: "Hinzufügen" runs 114 px past its card, and Settings values break mid-word.
+  - iPhone SE in French at the default text size: "Recevoir via un lien" overflows by 28 px and hides a checkbox.
+  - Pixel Tablet in Spanish: the keyboard covers the address dialog's Cancel and Confirm.
+  - A failed manual send says only "Error", "Erreur", "Fehler", "エラー", "Hata" or "Erro", with no reason. On iOS, an address that doesn't answer leaves the dialog waiting with no progress shown (three agents).
+
+  103 issues in all (1 blocker, 15 major), 69 minutes from start to the last report (the Free plan runs 5 macOS jobs at a time), $4.62 of model usage for the 20. Run it yourself:
+
+  ```bash
+  gh workflow run agent-testers.yml -f source_repo=localsend/localsend -f app_dir=app \
+    -f app_id=org.localsend.localsend_app -f android_personas=all -f ios_personas=all -f record_video=true
+  ```
 
 <p align="center"><img src="assets/real-finding-flutter.png" alt="Two phones on the same screen of Flutter's animations example app, a Pixel 7 and an iPhone SE in French, with the title Streamling your courses circled: both agents reported this typo on their own" width="100%"></p>
 
@@ -69,7 +83,7 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 |---|---|
 | `source_repo`, `ref` | App repo and branch (empty = this repo). Private repo: add a read-only `SOURCE_REPO_TOKEN` secret |
 | `app_dir`, `app_id` | App folder, Android package / iOS bundle id (if the other platform uses another id, it is read from its built app) |
-| `android_personas`, `ios_personas` | Ids from [personas.json](personas.json), one phone each |
+| `android_personas`, `ios_personas` | Ids from [personas.json](personas.json), one phone each, or `all`. 20 ready: 14 languages, right to left, tablets, text from small to the largest accessibility size |
 | `brief` | Agent instructions ([AGENT_BRIEF.md](AGENT_BRIEF.md)) |
 | `framework` | `auto` (default) or force one of the frameworks below |
 | `android_build` + `apk_path`, `ios_build` + `ios_app_path` | Your own build command, or a download of a prebuilt app (paths relative to `app_dir`) |
