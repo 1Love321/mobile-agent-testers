@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **Standalone skill**: `skills/mobile-agent-testers/` is the plugin's setup skill as a plain Agent Skill, for skill catalogs and agents without Claude Code plugins. A test keeps the two copies identical.
+
 ## 0.1.0 (19 November 2026)
 
 The first tagged version: everything behind the [LocalSend, AnkiDroid and Flutter runs](docs/runs/).
