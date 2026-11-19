@@ -1,0 +1,24 @@
+# Publishes a GitHub release when a version tag is pushed: git tag v0.2.0 && git push origin v0.2.0
+# The notes are that version's section of CHANGELOG.md, with its links made absolute.
+name: Release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Notes from CHANGELOG.md
+        run: |
+          V="${GITHUB_REF_NAME#v}"
+          awk -v v="$V" '/^## /{p = index($0, "## " v " ") == 1; next} p' CHANGELOG.md \
+            | perl -pe 's{\]\((?!https?://|#)(?:\./)?([^)]+)\)}{](https://github.com/$ENV{GITHUB_REPOSITORY}/blob/$ENV{GITHUB_REF_NAME}/$1)}g' \
+            > notes.md
+          grep -q . notes.md || { echo "No section for $V in CHANGELOG.md"; exit 1; }
+          cat notes.md
+      - name: Release
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file notes.md --verify-tag
