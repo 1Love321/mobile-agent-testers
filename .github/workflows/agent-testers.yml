@@ -301,7 +301,10 @@ jobs:
           d -g AppleKeyboards -array "en_US@sw=QWERTY;hw=US"
           d com.apple.Preferences KeyboardLastUsed -string "en_US@sw=QWERTY;hw=US"
           for k in KeyboardAutocapitalization KeyboardAutocorrection KeyboardPrediction KeyboardCheckSpelling; do d com.apple.Preferences $k -bool NO; done
-          for k in DidShowContinuousPathIntroduction KeyboardDidShowProductivityTutorial DidShowGestureKeyboardIntroduction; do d com.apple.Preferences $k -bool YES; done
+          # No keyboard tips on first typing ("slide to type"): recent iOS reads com.apple.keyboard.preferences
+          for k in DidShowContinuousPathIntroduction KeyboardDidShowProductivityTutorial DidShowGestureKeyboardIntroduction; do
+            d com.apple.Preferences $k -bool YES; d com.apple.keyboard.preferences $k -bool YES
+          done
           xcrun simctl shutdown "$UDID" && xcrun simctl boot "$UDID" && xcrun simctl bootstatus "$UDID" -b >/dev/null
 
       - name: Agent

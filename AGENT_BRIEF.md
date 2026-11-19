@@ -41,6 +41,7 @@ iOS
    each kind once, with the screens where you saw it: minor, unless it stops a task.
 
 ## Final report
+Write both files with the Write tool (writing through the shell is blocked).
 1. `results/<persona>/report.md`
    - 5-line summary with the device.
    - Issues, most severe first. For each: screenshot number(s), steps to reproduce,
