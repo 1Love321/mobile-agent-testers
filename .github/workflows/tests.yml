@@ -9,10 +9,13 @@ permissions:
   contents: read
 jobs:
   scripts:
-    runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        python: ["3.9", "3.13"]   # 3.9 is the python3 of a Mac without Homebrew (collect.sh runs there)
+        include:
+          - { python: "3.9", os: ubuntu-24.04 }   # the python3 of a Mac without Homebrew, where collect.sh runs
+          - { python: "3.13", os: ubuntu-latest }
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
