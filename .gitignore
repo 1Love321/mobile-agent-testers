@@ -1,7 +1,7 @@
 # Never commit the private key that decrypts results
 *_private.pem
 *.key
-runs/
+/runs/
 node_modules/
 demo-app/android/
 demo-app/ios/
