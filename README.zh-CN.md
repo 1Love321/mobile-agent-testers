@@ -16,6 +16,7 @@
 <p align="center"><a href="assets/localsend-20.mp4"><img src="assets/localsend-20.gif" alt="20 个 AI 测试员同时使用 LocalSend 的真实录屏：10 台 Android 模拟器和 10 台 iOS 模拟器，14 种语言，从小屏 Pixel 到 13 英寸 iPad。测试员完成后，手机上会显示它发现的问题数量。点击打开视频。" width="100%"></a><br>
 <sub>LocalSend 那次运行的真实录屏，已剪掉空闲时间。<a href="assets/localsend-20.mp4">完整视频（MP4）</a> · <a href="docs/runs/localsend-20.md">逐台设备查看这次运行</a></sub></p>
 
+[![Tests](https://github.com/pierridotite/mobile-agent-testers/actions/workflows/tests.yml/badge.svg)](https://github.com/pierridotite/mobile-agent-testers/actions/workflows/tests.yml)
 [![Stars](https://img.shields.io/github/stars/pierridotite/mobile-agent-testers?style=flat)](https://github.com/pierridotite/mobile-agent-testers/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 ![iOS + Android](https://img.shields.io/badge/platforms-iOS%20%2B%20Android-blue)
@@ -150,6 +151,7 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 - **结果加密**：公开仓库的日志是公开的，所以一切都用你的密钥加密。
 - **手机内屏蔽统计分析**，测试不会碰到你的真实数据。
 - **在你的电脑上生成一份汇总**：Claude 把描述同一缺陷的报告归并起来，你能看到每个缺陷被多少个角色遇到，以及哪些角色发现了哪类问题。
+- **每次推送都会测试**，离线、无需手机：无障碍检查、角色矩阵、汇总、加密结果（[tests/](tests/)）。
 
 ## 限制
 

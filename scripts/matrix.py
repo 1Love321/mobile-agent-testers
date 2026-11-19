@@ -13,6 +13,9 @@ elif wanted == ["all"]:
 missing = [p for p in wanted if p not in personas]
 if missing:
     raise SystemExit(f"Unknown personas: {missing}")
+other = [p for p in wanted if personas[p].get("platform", platform) != platform]
+if other:  # its device settings would be silently replaced by defaults
+    raise SystemExit(f"Not {platform} personas: {other}. Put them in the other platform's list.")
 rows = []
 for pid in wanted:
     p = personas[pid]

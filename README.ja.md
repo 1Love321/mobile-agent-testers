@@ -17,6 +17,7 @@ Swift、Kotlin Multiplatform、Capacitor、.NET MAUI に対応しています。
 <p align="center"><a href="assets/localsend-20.mp4"><img src="assets/localsend-20.gif" alt="20 人の AI テスターが同時に LocalSend を使う実際の画面録画：Android エミュレーター 10 台と iOS シミュレーター 10 台、14 言語、小さな Pixel から 13 インチの iPad まで。テスターが終わると、その端末に見つけた問題の数が表示されます。クリックで動画を開きます。" width="100%"></a><br>
 <sub>LocalSend での実行の実際の画面録画（待ち時間はカット）。<a href="assets/localsend-20.mp4">動画全体（MP4）</a> · <a href="docs/runs/localsend-20.md">端末ごとの実行記録</a></sub></p>
 
+[![Tests](https://github.com/pierridotite/mobile-agent-testers/actions/workflows/tests.yml/badge.svg)](https://github.com/pierridotite/mobile-agent-testers/actions/workflows/tests.yml)
 [![Stars](https://img.shields.io/github/stars/pierridotite/mobile-agent-testers?style=flat)](https://github.com/pierridotite/mobile-agent-testers/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 ![iOS + Android](https://img.shields.io/badge/platforms-iOS%20%2B%20Android-blue)
@@ -151,6 +152,7 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 - **結果は暗号化**：公開リポジトリのログは公開されるので、すべてあなたの鍵で暗号化します。
 - **端末内で分析ツールをブロック**するので、テストが本番の統計に触れることはありません。
 - **手元で 1 つのまとめ**：同じバグを指すレポートを Claude がまとめるので、各バグに何人のペルソナが当たったか、どのペルソナがどの種類の問題を見つけたかがわかります。
+- **プッシュごとにテスト**（オフライン、スマホ不要）：アクセシビリティチェック、ペルソナの割り当て、まとめ、結果の暗号化（[tests/](tests/)）。
 
 ## 制限
 

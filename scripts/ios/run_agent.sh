@@ -35,7 +35,7 @@ claude -p "Read $BRIEF and personas.json, then do the mission until the final re
 CODE=$?
 if [ -n "$REC" ]; then
   kill -INT "$REC" 2>/dev/null
-  for i in $(seq 1 30); do kill -0 "$REC" 2>/dev/null || break; sleep 1; done
+  for _ in $(seq 1 30); do kill -0 "$REC" 2>/dev/null || break; sleep 1; done
   cat "$RUNNER_TEMP/rec.log"; ls -l "results/$PERSONA/video"
 fi
 echo "Agent finished (exit $CODE), $(ls "results/$PERSONA" | wc -l) files"

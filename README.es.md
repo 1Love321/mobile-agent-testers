@@ -17,6 +17,7 @@ Multiplatform, Capacitor y .NET MAUI.
 <p align="center"><a href="assets/localsend-20.mp4"><img src="assets/localsend-20.gif" alt="Grabaciones de pantalla reales de 20 testers con IA usando LocalSend a la vez: 10 emuladores de Android y 10 simuladores de iOS en 14 idiomas, desde un Pixel pequeño hasta un iPad de 13 pulgadas. Cuando un tester termina, su teléfono muestra cuántos problemas encontró. Abre el vídeo." width="100%"></a><br>
 <sub>Grabaciones de pantalla reales de la ejecución en LocalSend, sin los tiempos muertos. <a href="assets/localsend-20.mp4">Vídeo completo (MP4)</a> · <a href="docs/runs/localsend-20.md">La ejecución, dispositivo por dispositivo</a></sub></p>
 
+[![Tests](https://github.com/pierridotite/mobile-agent-testers/actions/workflows/tests.yml/badge.svg)](https://github.com/pierridotite/mobile-agent-testers/actions/workflows/tests.yml)
 [![Stars](https://img.shields.io/github/stars/pierridotite/mobile-agent-testers?style=flat)](https://github.com/pierridotite/mobile-agent-testers/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 ![iOS + Android](https://img.shields.io/badge/platforms-iOS%20%2B%20Android-blue)
@@ -153,6 +154,7 @@ toolkit de interfaz. Los widgets con etiqueta (`Semantics` de Flutter, `contentD
 - **Resultados cifrados**: los logs de un repositorio público son públicos, así que todo se cifra con tu clave.
 - **Analítica bloqueada** dentro de los teléfonos, para que las pruebas nunca toquen tus estadísticas reales.
 - **Un resumen** en tu máquina: Claude agrupa los informes que describen el mismo error, así ves cuántas personas encontraron cada uno y qué personas encontraron cada tipo de problema.
+- **Pruebas** en cada push, sin conexión y sin teléfono: revisión de accesibilidad, matriz de personas, resumen, resultados cifrados ([tests/](tests/)).
 
 ## Límites
 

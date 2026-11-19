@@ -16,6 +16,7 @@ Multiplatform, Capacitor and .NET MAUI.
 <p align="center"><a href="assets/localsend-20.mp4"><img src="assets/localsend-20.gif" alt="Real screen recordings of 20 AI testers using LocalSend at the same time: 10 Android emulators and 10 iOS Simulators in 14 languages, from a small Pixel to a 13-inch iPad. When a tester finishes, its phone shows how many issues it found. Opens the video." width="100%"></a><br>
 <sub>Real screen recordings of the LocalSend run, idle time cut. <a href="assets/localsend-20.mp4">Full video (MP4)</a> · <a href="docs/runs/localsend-20.md">The run, device by device</a></sub></p>
 
+[![Tests](https://github.com/pierridotite/mobile-agent-testers/actions/workflows/tests.yml/badge.svg)](https://github.com/pierridotite/mobile-agent-testers/actions/workflows/tests.yml)
 [![Stars](https://img.shields.io/github/stars/pierridotite/mobile-agent-testers?style=flat)](https://github.com/pierridotite/mobile-agent-testers/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 ![iOS + Android](https://img.shields.io/badge/platforms-iOS%20%2B%20Android-blue)
@@ -152,6 +153,7 @@ toolkit works. Labelled widgets (Flutter `Semantics`, `contentDescription`,
 - **Encrypted results**: public repo logs are public, so everything is encrypted with your key.
 - **Analytics blocked** inside the phones, so tests never touch your real stats.
 - **One summary** on your machine: Claude groups the reports that describe the same bug, so you see how many personas hit each one and which personas found which kind of issue.
+- **Tests** on every push, offline and with no phone: accessibility check, persona matrix, summary, encrypted results ([tests/](tests/)).
 
 ## Limits
 

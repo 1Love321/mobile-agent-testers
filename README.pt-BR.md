@@ -17,6 +17,7 @@ Multiplatform, Capacitor e .NET MAUI.
 <p align="center"><a href="assets/localsend-20.mp4"><img src="assets/localsend-20.gif" alt="Gravações de tela reais de 20 testadores com IA usando o LocalSend ao mesmo tempo: 10 emuladores de Android e 10 simuladores de iOS em 14 idiomas, de um Pixel pequeno a um iPad de 13 polegadas. Quando um testador termina, o celular mostra quantos problemas ele encontrou. Abre o vídeo." width="100%"></a><br>
 <sub>Gravações de tela reais da execução no LocalSend, sem os tempos de espera. <a href="assets/localsend-20.mp4">Vídeo completo (MP4)</a> · <a href="docs/runs/localsend-20.md">A execução, aparelho por aparelho</a></sub></p>
 
+[![Tests](https://github.com/pierridotite/mobile-agent-testers/actions/workflows/tests.yml/badge.svg)](https://github.com/pierridotite/mobile-agent-testers/actions/workflows/tests.yml)
 [![Stars](https://img.shields.io/github/stars/pierridotite/mobile-agent-testers?style=flat)](https://github.com/pierridotite/mobile-agent-testers/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 ![iOS + Android](https://img.shields.io/badge/platforms-iOS%20%2B%20Android-blue)
@@ -153,6 +154,7 @@ toques mais precisos.
 - **Resultados criptografados**: os logs de um repositório público são públicos, então tudo é criptografado com a sua chave.
 - **Analytics bloqueado** dentro dos celulares, para os testes nunca mexerem nas suas estatísticas reais.
 - **Um resumo** na sua máquina: o Claude agrupa os relatórios que descrevem o mesmo bug, então você vê quantas personas encontraram cada um e quais personas encontraram cada tipo de problema.
+- **Testes** a cada push, offline e sem celular: verificação de acessibilidade, matriz de personas, resumo, resultados criptografados ([tests/](tests/)).
 
 ## Limites
 
