@@ -15,7 +15,8 @@ Android
 iOS
 - See the screen: `python3 scripts/ios/screen.py results/<persona> <NN>` (positions in points).
 - `bash scripts/ios/gesture.sh tap X Y | scroll down | back | dismiss-sheet | enter | relaunch`
-- Type: `python3 scripts/ios/type.py "text"` (tap the field first)
+- Type: `python3 scripts/ios/type.py "text"` (tap the field first). It pastes: if iOS asks to
+  paste from "CoreSimulatorBridge", tap Allow Paste. That alert comes from the tool, not the app.
 
 ## Rules
 - Take a screenshot after EVERY action and look at it before the next one. Number them in order.
