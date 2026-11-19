@@ -36,6 +36,9 @@ iOS
 3. Layout on THIS device: cut text, buttons hidden by the keyboard, notch or home bar,
    large text sizes, dark mode contrast.
 4. Error and empty states: no network answer, empty lists, wrong input.
+5. Accessibility: when `screen.py` ends with an `accessibility check` line (controls with no
+   name, touch targets under 48 dp / 44 pt), look at those controls on the screenshot. Report
+   each kind once, with the screens where you saw it: minor, unless it stops a task.
 
 ## Final report
 1. `results/<persona>/report.md`
