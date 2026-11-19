@@ -10,7 +10,7 @@
 | Distinct issues | 43, grouped by Claude with `scripts/collect.sh`, then checked by hand where marked |
 | Start to last report | under 10 min |
 | Model usage | $4.69 for the 10 agents |
-| Run | [44327125792](https://github.com/pierridotite/mobile-agent-testers/actions/runs/44327125792), and a second run on the 2.26.0alpha14 APK for the answer buttons: [44332167336](https://github.com/pierridotite/mobile-agent-testers/actions/runs/44332167336) |
+| Run | [44327125792](https://github.com/pierridotite/mobile-agent-testers/actions/runs/44327125792) (marked failed on GitHub because it also tried to build an iOS app it didn't need, which `ios_personas=none` now skips), and a second run on the 2.26.0alpha14 APK for the answer buttons: [44332167336](https://github.com/pierridotite/mobile-agent-testers/actions/runs/44332167336) |
 | Raw data | [data/ankidroid-10.json](data/ankidroid-10.json): every report with its device, agent time and model usage |
 
 What held up when checked by hand: on a Pixel 7 at 200% font, the Again / Hard / Good / Easy buttons are cut in half (still the case on the 2.26 alpha, in both rows when "Show large answer buttons" is on), the Statistics text runs off the right edge, and the welcome screen keeps "Get started" in English on devices set to Portuguese, Spanish and Japanese.

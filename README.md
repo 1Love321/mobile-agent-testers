@@ -4,6 +4,8 @@
 
 **[Runs](docs/runs/)** · **[Compare](docs/compare.md)** · **[FAQ](#faq)** · **[Personas](personas.json)** · **[Releases](https://github.com/pierridotite/mobile-agent-testers/releases)**
 
+English · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · [Português](README.pt-BR.md)
+
 No test scripts to write. Each tester is a Claude Code agent with its own iOS
 Simulator or Android emulator on GitHub Actions. It plays a persona (iPhone SE
 in Swedish at the largest text size, Pixel 7 at 200%, iPad in German, Arabic
@@ -146,6 +148,7 @@ toolkit works. Labelled widgets (Flutter `Semantics`, `contentDescription`,
 
 - **Personas** set the device: model, OS, font size, dark mode, language, location.
 - **Three tools per agent**: see the screen (with tap coordinates), gestures, typing.
+- **Accessibility check** on every screen: controls with no name and touch targets under 48 dp (Android) or 44 pt (iOS), for the agent to confirm on the screenshot.
 - **Encrypted results**: public repo logs are public, so everything is encrypted with your key.
 - **Analytics blocked** inside the phones, so tests never touch your real stats.
 - **One summary** on your machine: Claude groups the reports that describe the same bug, so you see how many personas hit each one and which personas found which kind of issue.
