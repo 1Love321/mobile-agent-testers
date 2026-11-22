@@ -1,6 +1,6 @@
 # Runs
 
-Every number in the README comes from one of these runs. Each page has the command to run it again, the devices, what every agent reported, and what was checked by hand.
+Every number in the README and in the [applied examples](../examples.md) comes from one of these runs. Each page has the command to run it again, the devices, what every agent reported, and what was checked by hand.
 
 | Run | App | Devices | Reports | Distinct bugs | Start to last report | Model usage |
 |---|---|---|---|---|---|---|
