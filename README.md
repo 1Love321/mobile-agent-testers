@@ -9,8 +9,8 @@ English · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Espa
 No test scripts to write. Each tester is a Claude Code agent with its own iOS
 Simulator or Android emulator on GitHub Actions. It plays a persona (iPhone SE
 in Swedish at the largest text size, Pixel 7 at 200%, iPad in German, Arabic
-right to left...), uses your app like a new user and writes a bug report with
-screenshots. Flutter, React Native, Expo, native Kotlin and Swift, Kotlin
+right to left...), uses your app like a new user (or runs through the feature you
+point it at) and writes a bug report with screenshots. Flutter, React Native, Expo, native Kotlin and Swift, Kotlin
 Multiplatform, Capacitor and .NET MAUI.
 
 GitHub's runners are free for public repos. You only pay for the model, with your
@@ -37,7 +37,11 @@ Large text makes the most striking screenshots, but it is a small part of what t
 - **Devices**: tablets that show the phone layout in a narrow column, the keyboard over Cancel and Confirm, the Android navigation bar over the last items of a list, an app that ignores dark mode.
 - **Data**: nothing kept after a relaunch (in the demo app).
 
-On LocalSend, 34 of the 46 bugs had nothing to do with text size or accessibility. Every report also ends with the persona's opinion and a score out of 10 (would they keep the app?), so a run shows where new users get lost, not only what is broken. To send all 20 at one flow, such as a new onboarding or a checkout, write your own brief, like [the one for AnkiDroid](briefs/ankidroid.md).
+On LocalSend, 34 of the 46 bugs had nothing to do with text size or accessibility. Every report also ends with the persona's opinion and a score out of 10 (would they keep the app?), so a run shows where new users get lost, not only what is broken.
+
+### Complex features too
+
+The default brief explores like a new user. Your own brief can send every agent through a whole mechanic, step by step: [AnkiDroid's](briefs/ankidroid.md) asked all 10 to create a deck, add three cards, study them, then change a setting, and two of them found the Back field of a new card hidden behind the keyboard. Point them at your hardest feature: a booking in several steps, an editor with undo, a sync between two screens, a puzzle game. The agents tap, long press, swipe and type, leave the app and come back, relaunch it to check what was saved, or open a deep link to start right at the feature. A brief can also raise the default budget of about 30 actions per agent.
 
 ## Real findings
 

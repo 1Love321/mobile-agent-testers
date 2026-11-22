@@ -10,7 +10,7 @@
 
 Nenhum script de teste para escrever. Cada testador é um agente do Claude Code com seu próprio simulador de iOS
 ou emulador de Android no GitHub Actions. Ele interpreta uma persona (iPhone SE em sueco com o maior tamanho de
-texto, Pixel 7 a 200%, iPad em alemão, árabe da direita para a esquerda...), usa o seu app como um usuário novo e
+texto, Pixel 7 a 200%, iPad em alemão, árabe da direita para a esquerda...), usa o seu app como um usuário novo (ou percorre a função que você indicar) e
 escreve um relatório de bugs com capturas de tela. Flutter, React Native, Expo, Kotlin e Swift nativos, Kotlin
 Multiplatform, Capacitor e .NET MAUI.
 
@@ -38,7 +38,11 @@ Texto grande rende as capturas mais chamativas, mas é uma parte pequena do que 
 - **Dispositivos**: tablets que mostram o layout de celular numa coluna estreita, o teclado por cima de Cancelar e Confirmar, a barra de navegação do Android por cima dos últimos itens de uma lista, um app que ignora o modo escuro.
 - **Dados**: nada salvo depois de reabrir o app (no app de demo).
 
-No LocalSend, 34 dos 46 bugs não tinham nada a ver com tamanho de texto nem com acessibilidade. Cada relatório também termina com a opinião da persona e uma nota de 0 a 10 (ela continuaria com o app?), então uma execução mostra onde os usuários novos se perdem, não só o que está quebrado. Para mandar os 20 para um único fluxo, como um novo onboarding ou um checkout, escreva o seu próprio brief, como [o do AnkiDroid](briefs/ankidroid.md).
+No LocalSend, 34 dos 46 bugs não tinham nada a ver com tamanho de texto nem com acessibilidade. Cada relatório também termina com a opinião da persona e uma nota de 0 a 10 (ela continuaria com o app?), então uma execução mostra onde os usuários novos se perdem, não só o que está quebrado.
+
+### Funções complexas também
+
+O brief padrão explora como um usuário novo. Com o seu próprio brief, você pode mandar cada agente percorrer uma mecânica inteira, passo a passo: [o do AnkiDroid](briefs/ankidroid.md) pediu aos 10 que criassem um baralho, adicionassem três cartões, estudassem e depois mudassem um ajuste, e dois encontraram o campo do verso de um cartão novo escondido atrás do teclado. Mande-os para a sua função mais difícil: uma reserva em várias etapas, um editor com desfazer, uma sincronização entre duas telas, um jogo de quebra-cabeça. Os agentes tocam, pressionam e seguram, deslizam e digitam, saem do app e voltam, reiniciam o app para conferir o que foi salvo ou abrem um deep link para começar direto na função. Um brief também pode aumentar o orçamento padrão de cerca de 30 ações por agente.
 
 ## Bugs reais encontrados
 
