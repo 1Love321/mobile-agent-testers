@@ -142,6 +142,7 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 | `app_dir`, `app_id` | アプリのフォルダー、Android のパッケージ名 / iOS の bundle id（もう一方のプラットフォームが別の id を使う場合は、ビルドしたアプリから読み取ります） |
 | `android_personas`, `ios_personas` | [personas.json](personas.json) の id（1 つにつき 1 台）、`all`、またはプラットフォームを飛ばす `none`。20 人が用意済み：14 言語、右から左、タブレット、小さい文字からアクセシビリティの最大サイズまで |
 | `brief` | エージェントへの指示（[AGENT_BRIEF.md](AGENT_BRIEF.md)） |
+| `bug_report` | 探索の代わりに再現するバグ：issue（`owner/repo#123` またはその URL）か、手順をそのまま書いたテキスト。各エージェントが自分の端末でその手順を試します（[briefs/reproduce.md](briefs/reproduce.md)） |
 | `framework` | `auto`（デフォルト）、または下のフレームワークのいずれかを指定 |
 | `android_build` + `apk_path`, `ios_build` + `ios_app_path` | 独自のビルドコマンド、またはビルド済みアプリのダウンロード（パスは `app_dir` からの相対パス） |
 | `block_hosts` | テスト中にブロックする分析系のホスト |

@@ -44,6 +44,9 @@ on:
       brief:
         description: Agent brief file
         default: AGENT_BRIEF.md
+      bug_report:
+        description: "Bug to reproduce instead of exploring: an issue (owner/repo#123 or its URL) or the steps as text. Agents follow it: read it first"
+        default: ""
       model:
         description: Claude model (alias or full id)
         default: sonnet
@@ -58,6 +61,7 @@ on:
 permissions:
   contents: read
   actions: read
+  issues: read   # bug_report: read the issue to reproduce
 
 jobs:
   plan:
@@ -210,6 +214,13 @@ jobs:
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
 
+      - name: Bug report to reproduce
+        if: inputs.bug_report != ''
+        env:
+          BUG_REPORT: ${{ inputs.bug_report }}
+          GH_TOKEN: ${{ secrets.SOURCE_REPO_TOKEN || github.token }}
+        run: bash scripts/bug_report.sh
+
       - name: Emulator + agent
         uses: reactivecircus/android-emulator-runner@v2
         env:
@@ -222,7 +233,7 @@ jobs:
           LOCALE: ${{ matrix.locale }}
           GEO: ${{ matrix.geo }}
           APP_ID: ${{ inputs.app_id }}
-          BRIEF: ${{ inputs.brief }}
+          BRIEF: ${{ inputs.bug_report != '' && inputs.brief == 'AGENT_BRIEF.md' && 'briefs/reproduce.md' || inputs.brief }}
           MODEL: ${{ inputs.model }}
           BLOCK_HOSTS: ${{ inputs.block_hosts }}
           RECORD_VIDEO: ${{ inputs.record_video }}
@@ -307,6 +318,13 @@ jobs:
           done
           xcrun simctl shutdown "$UDID" && xcrun simctl boot "$UDID" && xcrun simctl bootstatus "$UDID" -b >/dev/null
 
+      - name: Bug report to reproduce
+        if: inputs.bug_report != ''
+        env:
+          BUG_REPORT: ${{ inputs.bug_report }}
+          GH_TOKEN: ${{ secrets.SOURCE_REPO_TOKEN || github.token }}
+        run: bash scripts/bug_report.sh
+
       - name: Agent
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -317,7 +335,7 @@ jobs:
           LOCALE: ${{ matrix.locale }}
           GEO: ${{ matrix.geo }}
           APP_ID: ${{ inputs.app_id }}
-          BRIEF: ${{ inputs.brief }}
+          BRIEF: ${{ inputs.bug_report != '' && inputs.brief == 'AGENT_BRIEF.md' && 'briefs/reproduce.md' || inputs.brief }}
           MODEL: ${{ inputs.model }}
           BLOCK_HOSTS: ${{ inputs.block_hosts }}
           RECORD_VIDEO: ${{ inputs.record_video }}

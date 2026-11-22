@@ -142,6 +142,7 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 | `app_dir`, `app_id` | App folder, Android package / iOS bundle id (if the other platform uses another id, it is read from its built app) |
 | `android_personas`, `ios_personas` | Ids from [personas.json](personas.json), one phone each, `all`, or `none` to skip a platform. 20 ready: 14 languages, right to left, tablets, text from small to the largest accessibility size |
 | `brief` | Agent instructions ([AGENT_BRIEF.md](AGENT_BRIEF.md)) |
+| `bug_report` | A bug to reproduce instead of exploring: an issue (`owner/repo#123` or its URL) or the steps as text. Each agent follows it on its own device ([briefs/reproduce.md](briefs/reproduce.md)) |
 | `framework` | `auto` (default) or force one of the frameworks below |
 | `android_build` + `apk_path`, `ios_build` + `ios_app_path` | Your own build command, or a download of a prebuilt app (paths relative to `app_dir`) |
 | `block_hosts` | Analytics hosts blocked during tests |

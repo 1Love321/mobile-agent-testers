@@ -141,6 +141,7 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 | `app_dir`, `app_id` | 应用目录，Android 包名 / iOS bundle id（如果另一个平台用的是别的 id，会从它的构建产物中读取） |
 | `android_personas`, `ios_personas` | [personas.json](personas.json) 中的 id，每个角色一台手机；`all` 表示全部，`none` 表示跳过该平台。内置 20 个角色：14 种语言、从右到左、平板、从小号到最大辅助功能字号 |
 | `brief` | 给智能体的说明（[AGENT_BRIEF.md](AGENT_BRIEF.md)） |
+| `bug_report` | 要复现的缺陷，而不是自由探索：一个 issue（`owner/repo#123` 或它的链接），或者直接写步骤。每个智能体在自己的设备上照着做（[briefs/reproduce.md](briefs/reproduce.md)） |
 | `framework` | `auto`（默认），或强制使用下表中的某个框架 |
 | `android_build` + `apk_path`, `ios_build` + `ios_app_path` | 你自己的构建命令，或下载一个预构建的应用（路径相对于 `app_dir`） |
 | `block_hosts` | 测试期间屏蔽的统计分析域名 |

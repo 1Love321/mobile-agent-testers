@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- **Reproduce a bug report**: the `bug_report` input takes an issue (`owner/repo#123` or its URL) or the steps as text. Each agent follows it on its own device with [briefs/reproduce.md](briefs/reproduce.md) and answers yes, no or unclear, with screenshots; the summary starts with a table of the devices where it happens.
 - **Standalone skill**: `skills/mobile-agent-testers/` is the plugin's setup skill as a plain Agent Skill, for skill catalogs and agents without Claude Code plugins. A test keeps the two copies identical.
 
 ## 0.1.0 (19 November 2026)

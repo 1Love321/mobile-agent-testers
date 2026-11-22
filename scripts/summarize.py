@@ -5,12 +5,15 @@ Reports that describe the same bug in other words, or in another language, are
 grouped by Claude when the `claude` CLI is installed (your own login, like the
 testers). Only the report titles, screens and severities are sent. Without the
 CLI, or with SUMMARY_GROUPING=0, only identical titles are merged.
+A reproduction run (bug_report input, briefs/reproduce.md) starts with a table:
+which devices reproduced the reported bug, which did not, and the evidence.
 Usage: python3 scripts/summarize.py <collected_run_dir>"""
 import json, os, re, shutil, subprocess, sys
 from collections import defaultdict
 from pathlib import Path
 
 ORDER = {"blocker": 0, "major": 1, "minor": 2, "cosmetic": 3}
+RESULTS = ("yes", "unclear", "no")   # answers of briefs/reproduce.md, in table order
 CLASSES = ["layout and text size", "feedback and errors", "accessibility", "translation",
            "right to left", "tablet", "system bars", "copy", "visual polish", "crash",
            "likely test artefact"]
@@ -45,6 +48,58 @@ def load(run_dir):
                              "title": (i.get("title") or "?").strip(),
                              "screen": (i.get("screen") or "").strip()})
     return findings, scores
+
+
+def load_reproduction(run_dir):
+    """One row per persona that answered `reproduced`, and the title of the bug report."""
+    rows, title = [], ""
+    for f in sorted(Path(run_dir).glob("*/results/*/findings.json")):
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        answer = str(data.get("reproduced") or "").strip().lower()
+        if answer:
+            evidence = data.get("evidence") if isinstance(data.get("evidence"), list) else []
+            rows.append({"persona": f.parent.name, "result": answer if answer in RESULTS else "unclear",
+                         "evidence": [str(e) for e in evidence], "note": str(data.get("note") or "").strip()})
+    for b in sorted(Path(run_dir).glob("*/results/bug_report.md")):
+        lines = b.read_text(encoding="utf-8", errors="replace").strip().splitlines()
+        title = lines[0].lstrip("#").strip() if lines else ""
+        break
+    return rows, title
+
+
+def personas_by_id():
+    try:
+        data = json.loads((Path(__file__).resolve().parent.parent / "personas.json").read_text(encoding="utf-8"))
+        return {p["id"]: p for p in data}
+    except (OSError, ValueError, KeyError, TypeError):
+        return {}
+
+
+def phone(persona):
+    """Device, language and text size of a persona, as shown in the reproduction table."""
+    d = (persona or {}).get("device") or {}
+    name = d.get("name") or (f'{d["simulator"]}, iOS {d.get("ios", "?")}' if "simulator" in d else "")
+    size = f'x{d["font_scale"]}' if "font_scale" in d else d.get("text_size", "")
+    return name, (persona or {}).get("locale", ""), str(size)
+
+
+def render_reproduction(rows, title):
+    personas, n = personas_by_id(), {r: sum(x["result"] == r for x in rows) for r in RESULTS}
+    lines = ["## Reproduction", ""]
+    if title:
+        lines.append(f"Bug: {cell(title)}")
+    lines.append(f"Reproduced on {n['yes']} of {len(rows)} devices, not reproduced on {n['no']}, "
+                 f"unclear on {n['unclear']}. Open the evidence screenshots before you trust a row.")
+    lines += ["", "| Reproduced | Persona | Device | Language | Text size | Evidence | Note |",
+              "|---|---|---|---|---|---|---|"]
+    for r in sorted(rows, key=lambda x: (RESULTS.index(x["result"]), x["persona"])):
+        device, locale, size = phone(personas.get(r["persona"]))
+        lines.append(f"| {r['result']} | {r['persona']} | {cell(device)} | {locale} | {size} "
+                     f"| {cell(', '.join(r['evidence']))} | {cell(r['note'])} |")
+    return lines + [""]
 
 
 def group_by_title(findings):
@@ -99,7 +154,7 @@ def cell(s):
     return str(s).replace("|", "\\|").replace("\n", " ")
 
 
-def render(findings, scores, groups, by_claude):
+def render(findings, scores, groups, by_claude, repro=None):
     by_id = {f["id"]: f for f in findings}
     rows = []
     for g in groups:
@@ -111,6 +166,10 @@ def render(findings, scores, groups, by_claude):
     rows.sort(key=lambda r: (ORDER.get(r["sev"], 9), -len(r["personas"]), r["title"].lower()))
     personas = sorted({f["persona"] for f in findings})
     lines = ["# Agent test summary", ""]
+    if repro and repro[0]:
+        lines += render_reproduction(*repro) + ["## Everything else the agents reported", ""]
+        if not findings:
+            return "\n".join(lines + ["Nothing else."]) + "\n"
     head = f"{len(findings)} reports from {len(personas)} personas"
     if scores:
         head += f", average score {sum(scores) / len(scores):.1f}/10"
@@ -150,7 +209,8 @@ def main():
         sys.exit(__doc__)
     findings, scores = load(sys.argv[1])
     groups = group_with_claude(findings)
-    print(render(findings, scores, groups or group_by_title(findings), groups is not None), end="")
+    print(render(findings, scores, groups or group_by_title(findings), groups is not None,
+                 load_reproduction(sys.argv[1])), end="")
 
 
 if __name__ == "__main__":

@@ -100,5 +100,63 @@ class Summary(unittest.TestCase):
         self.assertIn("install the claude CLI", out.stdout)
 
 
+class Reproduction(unittest.TestCase):
+    """A run with bug_report: each persona answers whether it reproduced the bug."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        write_run(self.tmp.name, {
+            "anna": {"reproduced": "no", "evidence": ["09"], "note": "Every tab opens", "issues": []},
+            "layla": {"reproduced": "YES", "evidence": ["04", "05"], "note": "Crash | on Send",
+                      "issues": [{"title": "Arabic digits mixed", "severity": "minor", "screen": "Send"}]},
+            "kenji": {"reproduced": "maybe", "evidence": "not a list", "issues": []},
+        })
+        Path(self.tmp.name, "layla", "results", "bug_report.md").write_text(
+            "# bug: Clicking any of the tabs crashes\n\nReported in https://example.com/1\n", encoding="utf-8")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_rows_title_and_odd_answers(self):
+        rows, title = summarize.load_reproduction(self.tmp.name)
+        self.assertEqual(title, "bug: Clicking any of the tabs crashes")
+        self.assertEqual({r["persona"]: r["result"] for r in rows}, {"anna": "no", "layla": "yes", "kenji": "unclear"})
+        self.assertEqual([r["evidence"] for r in rows if r["persona"] == "kenji"], [[]])
+
+    def test_table_comes_first_yes_then_unclear_then_no(self):
+        findings, scores = summarize.load(self.tmp.name)
+        md = summarize.render(findings, scores, summarize.group_by_title(findings), False,
+                              summarize.load_reproduction(self.tmp.name))
+        self.assertTrue(md.startswith("# Agent test summary\n\n## Reproduction\n"))
+        self.assertIn("Reproduced on 1 of 3 devices, not reproduced on 1, unclear on 1.", md)
+        rows = [line for line in md.splitlines() if line.startswith(("| yes", "| no", "| unclear"))]
+        self.assertEqual([r.split(" | ")[1] for r in rows], ["layla", "kenji", "anna"])
+        self.assertEqual(rows[0], "| yes | layla | Pixel 6, Android 13 | ar-EG | x1.15 | 04, 05 | Crash \\| on Send |")
+        self.assertIn("## Everything else the agents reported", md)
+        self.assertIn("| minor | Arabic digits mixed | 1 (layla) | Send |", md)
+
+    def test_ios_persona_shows_simulator_and_text_size(self):
+        self.assertEqual(summarize.phone(summarize.personas_by_id()["clara"]),
+                         ("iPhone SE (3rd generation), iOS 18", "fr-FR", "large"))
+
+    def test_a_normal_run_has_no_reproduction_table(self):
+        with tempfile.TemporaryDirectory() as d:
+            write_run(d, FINDINGS)
+            rows, _ = summarize.load_reproduction(d)
+            findings, scores = summarize.load(d)
+            md = summarize.render(findings, scores, summarize.group_by_title(findings), False, (rows, ""))
+        self.assertEqual(rows, [])
+        self.assertNotIn("Reproduction", md)
+
+    def test_command_line_with_nothing_else_reported(self):
+        with tempfile.TemporaryDirectory() as d:
+            write_run(d, {"olga": {"reproduced": "no", "evidence": ["03"], "issues": []}})
+            out = subprocess.run([sys.executable, str(ROOT / "scripts/summarize.py"), d],
+                                 env=dict(os.environ, SUMMARY_GROUPING="0"), capture_output=True, text=True)
+        self.assertEqual(out.returncode, 0, out.stderr)
+        self.assertIn("Reproduced on 0 of 1 devices", out.stdout)
+        self.assertTrue(out.stdout.endswith("Nothing else.\n"))
+
+
 if __name__ == "__main__":
     unittest.main()
