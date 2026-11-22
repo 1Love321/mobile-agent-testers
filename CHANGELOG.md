@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- **Cheaper models**: `model=haiku`, or any Anthropic-compatible API (OpenRouter, DeepSeek, Kimi, GLM, MiniMax, Qwen) with the new `llm_base_url` input and an `LLM_API_KEY` secret ([scripts/llm_env.sh](scripts/llm_env.sh)). The findings depend on how well the model reads screenshots and reasons: [docs/cheaper-models.md](docs/cheaper-models.md).
+- **Improvement report**: with [briefs/improve.md](briefs/improve.md), each persona uses the app once to reach its goal, then lists what to change first, by area and impact. SUMMARY.md starts with the goals reached, the actions and the scores, then the improvements.
+- **Compare two versions**: `scripts/compare.py` puts two runs of the same personas side by side (two branches, two builds): goals reached, actions, scores, issues seen on one version only, improvements by area ([docs/compare-versions.md](docs/compare-versions.md)).
+- **README**: a "What it does" list of the uses, and the LocalSend, AnkiDroid and Flutter runs grouped under "Applied examples".
 - **Reproduce a bug report**: the `bug_report` input takes an issue (`owner/repo#123` or its URL) or the steps as text. Each agent follows it on its own device with [briefs/reproduce.md](briefs/reproduce.md) and answers yes, no or unclear, with screenshots; the summary starts with a table of the devices where it happens.
 - **Standalone skill**: `skills/mobile-agent-testers/` is the plugin's setup skill as a plain Agent Skill, for skill catalogs and agents without Claude Code plugins. A test keeps the two copies identical.
 

@@ -27,7 +27,22 @@ Claude ou chave de API: de US$ 0,15 a US$ 0,55 por celular [nestas execuções](
 ![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-orange)
 [![Last commit](https://img.shields.io/github/last-commit/pierridotite/mobile-agent-testers)](https://github.com/pierridotite/mobile-agent-testers/commits/main)
 
-## Não é só acessibilidade
+## O que ele faz
+
+Um uso por execução, escolhido com os parâmetros de [Teste o seu próprio app](#teste-o-seu-próprio-app).
+
+- **Explorar como usuários novos** (o padrão). Cada persona tenta chegar ao seu objetivo e conta o que atrapalha, com capturas numeradas.
+- **Percorrer uma função do começo ao fim.** O seu próprio brief manda cada agente por uma mecânica inteira: uma reserva em várias etapas, um editor com desfazer, uma sincronização entre duas telas. Os agentes tocam, pressionam e seguram, deslizam e digitam, saem do app e voltam, reiniciam o app para conferir o que foi salvo ou abrem um deep link para começar direto na função, e um brief pode aumentar o orçamento de cerca de 30 ações. [O do AnkiDroid](briefs/ankidroid.md) encontrou o campo do verso de um cartão novo escondido atrás do teclado.
+- **Reproduzir um relato de bug** em cada celular: você passa uma issue ou os passos, e cada agente responde sim, não ou incerto, com capturas ([briefs/reproduce.md](briefs/reproduce.md)).
+- **Gerar um relatório de melhorias.** Cada persona usa o app uma vez e depois diz onde hesitou, o que esperava e o que mudaria primeiro, por área e impacto ([briefs/improve.md](briefs/improve.md)).
+- **Comparar duas versões.** As mesmas personas em dois branches ou builds, e depois uma tabela: objetivos alcançados, ações, notas, problemas vistos em uma versão só ([docs/compare-versions.md](docs/compare-versions.md)). Uma checagem antes de um teste A/B de verdade, não um substituto.
+- **Usar um modelo mais barato**: Claude Haiku, ou qualquer API compatível com a Anthropic (OpenRouter, DeepSeek, Kimi, GLM, MiniMax, Qwen). Os achados dependem de quão bem o modelo lê as capturas e raciocina ([docs/cheaper-models.md](docs/cheaper-models.md)).
+
+## Exemplos aplicados
+
+Execuções reais em apps de código aberto, sem nada plantado.
+
+### Não é só acessibilidade
 
 Texto grande rende as capturas mais chamativas, mas é uma parte pequena do que os agentes relatam. Cada persona tem um objetivo ("terminar uma tarefa sem inglês", "preencher cada campo de texto com caracteres turcos, emojis e textos muito longos", "sair do app no meio e voltar depois") e tenta chegar lá como um usuário novo, então os agentes relatam tudo o que atrapalha:
 
@@ -39,12 +54,6 @@ Texto grande rende as capturas mais chamativas, mas é uma parte pequena do que 
 - **Dados**: nada salvo depois de reabrir o app (no app de demo).
 
 No LocalSend, 34 dos 46 bugs não tinham nada a ver com tamanho de texto nem com acessibilidade. Cada relatório também termina com a opinião da persona e uma nota de 0 a 10 (ela continuaria com o app?), então uma execução mostra onde os usuários novos se perdem, não só o que está quebrado.
-
-### Funções complexas também
-
-O brief padrão explora como um usuário novo. Com o seu próprio brief, você pode mandar cada agente percorrer uma mecânica inteira, passo a passo: [o do AnkiDroid](briefs/ankidroid.md) pediu aos 10 que criassem um baralho, adicionassem três cartões, estudassem e depois mudassem um ajuste, e dois encontraram o campo do verso de um cartão novo escondido atrás do teclado. Mande-os para a sua função mais difícil: uma reserva em várias etapas, um editor com desfazer, uma sincronização entre duas telas, um jogo de quebra-cabeça. Os agentes tocam, pressionam e seguram, deslizam e digitam, saem do app e voltam, reiniciam o app para conferir o que foi salvo ou abrem um deep link para começar direto na função. Um brief também pode aumentar o orçamento padrão de cerca de 30 ações por agente.
-
-## Bugs reais encontrados
 
 ### LocalSend: 20 agentes, 20 aparelhos, 14 idiomas
 
@@ -142,8 +151,9 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 | `source_repo`, `ref` | Repositório e branch do app (vazio = este repositório). Repositório privado: adicione um secret `SOURCE_REPO_TOKEN` somente leitura |
 | `app_dir`, `app_id` | Pasta do app, pacote Android / bundle id iOS (se a outra plataforma usa outro id, ele é lido do app compilado) |
 | `android_personas`, `ios_personas` | Ids do [personas.json](personas.json), um celular cada, `all`, ou `none` para pular uma plataforma. 20 prontas: 14 idiomas, direita para a esquerda, tablets, texto do pequeno ao maior tamanho de acessibilidade |
-| `brief` | Instruções para os agentes ([AGENT_BRIEF.md](AGENT_BRIEF.md)) |
+| `brief` | Instruções para os agentes: [AGENT_BRIEF.md](AGENT_BRIEF.md) para explorar, [briefs/improve.md](briefs/improve.md) para um relatório de melhorias, ou o seu para uma função |
 | `bug_report` | Um bug para reproduzir em vez de explorar: uma issue (`owner/repo#123` ou a URL dela) ou os passos em texto. Cada agente segue os passos no próprio aparelho ([briefs/reproduce.md](briefs/reproduce.md)) |
+| `model`, `llm_base_url` | `sonnet` por padrão, `haiku` para gastar menos, ou qualquer API compatível com a Anthropic com a chave em um secret `LLM_API_KEY` ([docs/cheaper-models.md](docs/cheaper-models.md)) |
 | `framework` | `auto` (padrão) ou force um dos frameworks abaixo |
 | `android_build` + `apk_path`, `ios_build` + `ios_app_path` | Seu próprio comando de build, ou o download de um app já compilado (caminhos relativos a `app_dir`) |
 | `block_hosts` | Hosts de analytics bloqueados durante os testes |
@@ -191,7 +201,7 @@ Não. No LocalSend, os 103 relatórios eram 46 bugs distintos, e 29 deles foram 
 
 ### Quanto custa?
 
-Os runners do GitHub são gratuitos para repositórios públicos, macOS incluído. O uso do modelo foi de US$ 0,15 a US$ 0,55 por agente [nestas execuções](docs/runs/), cerca de US$ 5 para 20 celulares. Com uma assinatura do Claude, as execuções contam no uso do seu plano em vez de virar conta.
+Os runners do GitHub são gratuitos para repositórios públicos, macOS incluído. O uso do modelo foi de US$ 0,15 a US$ 0,55 por agente [nestas execuções](docs/runs/), cerca de US$ 5 para 20 celulares. Com uma assinatura do Claude, as execuções contam no uso do seu plano em vez de virar conta. Para gastar menos, use `model=haiku` ou o modelo de outro provedor: [docs/cheaper-models.md](docs/cheaper-models.md).
 
 ### Quanto tempo leva uma execução?
 

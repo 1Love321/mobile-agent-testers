@@ -26,7 +26,22 @@ Claude subscription or API key: about $0.15 to $0.55 per phone in [these runs](d
 ![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-orange)
 [![Last commit](https://img.shields.io/github/last-commit/pierridotite/mobile-agent-testers)](https://github.com/pierridotite/mobile-agent-testers/commits/main)
 
-## Not just accessibility
+## What it does
+
+One use per run, set with the inputs of [Test your own app](#test-your-own-app).
+
+- **Explore like new users** (the default). Each persona tries to reach its goal and reports what gets in the way, with numbered screenshots.
+- **Run one feature end to end.** Your own brief sends every agent through a whole mechanic: a booking in several steps, an editor with undo, a sync between two screens. Agents tap, long press, swipe and type, leave the app and come back, relaunch it to check what was saved, or open a deep link to start right at the feature, and a brief can raise the budget of about 30 actions. [AnkiDroid's](briefs/ankidroid.md) found the Back field of a new card hidden behind the keyboard.
+- **Reproduce a bug report** on every phone: give an issue or the steps, and each agent answers yes, no or unclear, with screenshots ([briefs/reproduce.md](briefs/reproduce.md)).
+- **Get an improvement report.** Each persona uses the app once, then says where it hesitated, what it expected and what to change first, by area and impact ([briefs/improve.md](briefs/improve.md)).
+- **Compare two versions.** The same personas on two branches or builds, then one table: goals reached, actions, scores, issues seen on one version only ([docs/compare-versions.md](docs/compare-versions.md)). A check before a real A/B test, not a replacement for one.
+- **Use a cheaper model**: Claude Haiku, or any Anthropic-compatible API (OpenRouter, DeepSeek, Kimi, GLM, MiniMax, Qwen). The findings are only as good as the model's reading of screenshots and its reasoning ([docs/cheaper-models.md](docs/cheaper-models.md)).
+
+## Applied examples
+
+Real runs on open-source apps, with nothing planted.
+
+### Not just accessibility
 
 Large text makes the most striking screenshots, but it is a small part of what the agents report. Each persona has a goal ("finish one task without English", "fill every text field with Turkish characters, emoji and very long text", "leave the app in the middle of it, then come back") and tries to reach it like a new user, so the agents report whatever gets in the way:
 
@@ -38,12 +53,6 @@ Large text makes the most striking screenshots, but it is a small part of what t
 - **Data**: nothing kept after a relaunch (in the demo app).
 
 On LocalSend, 34 of the 46 bugs had nothing to do with text size or accessibility. Every report also ends with the persona's opinion and a score out of 10 (would they keep the app?), so a run shows where new users get lost, not only what is broken.
-
-### Complex features too
-
-The default brief explores like a new user. Your own brief can send every agent through a whole mechanic, step by step: [AnkiDroid's](briefs/ankidroid.md) asked all 10 to create a deck, add three cards, study them, then change a setting, and two of them found the Back field of a new card hidden behind the keyboard. Point them at your hardest feature: a booking in several steps, an editor with undo, a sync between two screens, a puzzle game. The agents tap, long press, swipe and type, leave the app and come back, relaunch it to check what was saved, or open a deep link to start right at the feature. A brief can also raise the default budget of about 30 actions per agent.
-
-## Real findings
 
 ### LocalSend: 20 agents, 20 devices, 14 languages
 
@@ -141,8 +150,9 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 | `source_repo`, `ref` | App repo and branch (empty = this repo). Private repo: add a read-only `SOURCE_REPO_TOKEN` secret |
 | `app_dir`, `app_id` | App folder, Android package / iOS bundle id (if the other platform uses another id, it is read from its built app) |
 | `android_personas`, `ios_personas` | Ids from [personas.json](personas.json), one phone each, `all`, or `none` to skip a platform. 20 ready: 14 languages, right to left, tablets, text from small to the largest accessibility size |
-| `brief` | Agent instructions ([AGENT_BRIEF.md](AGENT_BRIEF.md)) |
+| `brief` | Agent instructions: [AGENT_BRIEF.md](AGENT_BRIEF.md) to explore, [briefs/improve.md](briefs/improve.md) for an improvement report, or your own for one feature |
 | `bug_report` | A bug to reproduce instead of exploring: an issue (`owner/repo#123` or its URL) or the steps as text. Each agent follows it on its own device ([briefs/reproduce.md](briefs/reproduce.md)) |
+| `model`, `llm_base_url` | `sonnet` by default, `haiku` to spend less, or any Anthropic-compatible API with its key in an `LLM_API_KEY` secret ([docs/cheaper-models.md](docs/cheaper-models.md)) |
 | `framework` | `auto` (default) or force one of the frameworks below |
 | `android_build` + `apk_path`, `ios_build` + `ios_app_path` | Your own build command, or a download of a prebuilt app (paths relative to `app_dir`) |
 | `block_hosts` | Analytics hosts blocked during tests |
@@ -190,7 +200,7 @@ No. On LocalSend, the 103 reports were 46 distinct bugs, and 29 of them were fou
 
 ### How much does it cost?
 
-GitHub's runners are free for public repos, macOS included. Model usage was $0.15 to $0.55 per agent in [these runs](docs/runs/), so about $5 for 20 phones. With a Claude subscription, runs count against your plan's usage instead of a bill.
+GitHub's runners are free for public repos, macOS included. Model usage was $0.15 to $0.55 per agent in [these runs](docs/runs/), so about $5 for 20 phones. With a Claude subscription, runs count against your plan's usage instead of a bill. To spend less, run `model=haiku` or another provider's model: [docs/cheaper-models.md](docs/cheaper-models.md).
 
 ### How long does a run take?
 

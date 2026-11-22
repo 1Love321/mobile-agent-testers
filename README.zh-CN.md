@@ -26,7 +26,22 @@
 ![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-orange)
 [![Last commit](https://img.shields.io/github/last-commit/pierridotite/mobile-agent-testers)](https://github.com/pierridotite/mobile-agent-testers/commits/main)
 
-## 不只是无障碍
+## 能做什么
+
+每次运行一种用法，用[测试你自己的应用](#测试你自己的应用)里的参数来设置。
+
+- **像新用户一样探索**（默认）。每个角色都会努力完成自己的目标，并报告一路上遇到的障碍，附带编号截图。
+- **把一个功能从头测到尾。** 用你自己的 brief 让每个智能体完整走一遍某个机制：分几步的预订、带撤销的编辑器、两个页面之间的同步。智能体会点按、长按、滑动和输入，离开应用再回来，重启应用检查保存了什么，或者打开深层链接直接进入这个功能；brief 还可以提高默认约 30 步操作的预算。[AnkiDroid 的 brief](briefs/ankidroid.md) 就发现新卡片的背面输入框被键盘挡住了。
+- **在每台手机上复现一个缺陷报告**：给出一个 issue 或复现步骤，每个智能体回答“是 / 否 / 不确定”，并附上截图（[briefs/reproduce.md](briefs/reproduce.md)）。
+- **生成改进报告。** 每个角色把应用用一遍，然后说出在哪里犹豫、原本期待什么、最该先改什么，并标出领域和影响（[briefs/improve.md](briefs/improve.md)）。
+- **对比两个版本。** 同一批角色分别使用两个分支或构建，最后得到一张表：目标是否达成、操作次数、评分、只在一个版本出现的问题（[docs/compare-versions.md](docs/compare-versions.md)）。适合在真正的 A/B 测试之前做检查，但不能代替 A/B 测试。
+- **使用更便宜的模型**：Claude Haiku，或任何兼容 Anthropic 接口的 API（OpenRouter、DeepSeek、Kimi、GLM、MiniMax、通义千问）。发现的质量取决于模型读截图的能力和推理能力（[docs/cheaper-models.md](docs/cheaper-models.md)）。
+
+## 应用实例
+
+在开源应用上的真实运行，没有预先埋入任何缺陷。
+
+### 不只是无障碍
 
 大字号的截图最醒目，但这只是智能体报告内容的一小部分。每个角色都有自己的目标（“不靠英语完成一项任务”“在每个输入框里填土耳其语字符、表情符号和超长文本”“用到一半离开应用，再回来”），像新用户一样去完成，所以一路上挡路的问题都会被报告出来：
 
@@ -38,11 +53,6 @@
 - **数据**：重新打开后什么都没保存（演示应用）。
 
 在 LocalSend 上，46 个缺陷中有 34 个与字号和无障碍都无关。每份报告最后还有角色自己的看法和 10 分制评分（会不会继续用这个应用？），所以一次运行不仅告诉你哪里坏了，也告诉你新用户在哪里卡住。
-### 复杂功能也能测
-
-默认的 brief 让智能体像新用户一样自由探索。你也可以写自己的 brief，让每个智能体一步步走完一整套机制：[AnkiDroid 的 brief](briefs/ankidroid.md) 让 10 个智能体都去创建卡组、添加三张卡片、学习一遍，再改一项设置，其中两个发现新卡片的背面输入框被键盘挡住了。把它们派去测你最难的功能吧：分好几步的预订、带撤销的编辑器、两个页面之间的同步、益智游戏。智能体可以点按、长按、滑动、输入，离开应用再回来，重启应用检查数据有没有保存，或者打开深层链接直接进入某个功能。brief 还可以提高默认每个智能体约 30 步操作的预算。
-
-## 真实发现
 
 ### LocalSend：20 个智能体，20 台设备，14 种语言
 
@@ -140,8 +150,9 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 | `source_repo`, `ref` | 应用仓库和分支（留空 = 本仓库）。私有仓库：添加一个只读的 `SOURCE_REPO_TOKEN` secret |
 | `app_dir`, `app_id` | 应用目录，Android 包名 / iOS bundle id（如果另一个平台用的是别的 id，会从它的构建产物中读取） |
 | `android_personas`, `ios_personas` | [personas.json](personas.json) 中的 id，每个角色一台手机；`all` 表示全部，`none` 表示跳过该平台。内置 20 个角色：14 种语言、从右到左、平板、从小号到最大辅助功能字号 |
-| `brief` | 给智能体的说明（[AGENT_BRIEF.md](AGENT_BRIEF.md)） |
+| `brief` | 给智能体的说明：[AGENT_BRIEF.md](AGENT_BRIEF.md) 用于探索，[briefs/improve.md](briefs/improve.md) 用于改进报告，也可以用你自己写的来测某个功能 |
 | `bug_report` | 要复现的缺陷，而不是自由探索：一个 issue（`owner/repo#123` 或它的链接），或者直接写步骤。每个智能体在自己的设备上照着做（[briefs/reproduce.md](briefs/reproduce.md)） |
+| `model`、`llm_base_url` | 默认 `sonnet`，想省钱用 `haiku`，也可以用任何兼容 Anthropic 接口的 API，密钥放在 `LLM_API_KEY` secret 里（[docs/cheaper-models.md](docs/cheaper-models.md)） |
 | `framework` | `auto`（默认），或强制使用下表中的某个框架 |
 | `android_build` + `apk_path`, `ios_build` + `ios_app_path` | 你自己的构建命令，或下载一个预构建的应用（路径相对于 `app_dir`） |
 | `block_hosts` | 测试期间屏蔽的统计分析域名 |
@@ -187,7 +198,7 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 
 ### 要花多少钱？
 
-公开仓库的 GitHub runner 免费，包括 macOS。在[这些运行](docs/runs/)中，每个智能体的模型用量为 0.15 到 0.55 美元，20 台手机大约 5 美元。如果使用 Claude 订阅，运行会计入你套餐的用量，不会另外收费。
+公开仓库的 GitHub runner 免费，包括 macOS。在[这些运行](docs/runs/)中，每个智能体的模型用量为 0.15 到 0.55 美元，20 台手机大约 5 美元。如果使用 Claude 订阅，运行会计入你套餐的用量，不会另外收费。想省钱，可以用 `model=haiku` 或其他服务商的模型：见 [docs/cheaper-models.md](docs/cheaper-models.md)。
 
 ### 一次运行要多久？
 

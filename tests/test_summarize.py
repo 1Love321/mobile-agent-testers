@@ -158,5 +158,72 @@ class Reproduction(unittest.TestCase):
         self.assertTrue(out.stdout.endswith("Nothing else.\n"))
 
 
+
+class Walkthrough(unittest.TestCase):
+    """briefs/improve.md: goal reached, actions, score and improvements of each persona."""
+    RUN = {
+        "anna": {"score": 5, "goal_reached": "Partly", "actions": 31, "issues": [], "improvements": [
+            {"title": "Say why the app needs all files", "area": "Onboarding", "impact": "high",
+             "screen": "Permissions", "screens": ["04", "05"], "why": "I almost | gave up"},
+            {"title": "Bigger Send button", "area": "layout", "impact": "low", "screen": "Send"}]},
+        "noah": {"score": 8, "goal_reached": "yes", "actions": 12, "issues": [
+            {"title": "Typo on home", "severity": "cosmetic", "screen": "Home"}], "improvements": [
+            {"title": "Skip the tour", "area": "onboarding", "impact": "medium"},
+            {"title": "", "area": "copy"}, "not a dict"]},
+        "kenji": {"score": 7, "issues": []},   # default brief: not part of the walkthrough
+    }
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        write_run(self.tmp.name, self.RUN)
+        self.rows = summarize.load_walkthrough(self.tmp.name)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_rows(self):
+        by = {r["persona"]: r for r in self.rows}
+        self.assertEqual(sorted(by), ["anna", "noah"])
+        self.assertEqual((by["anna"]["goal"], by["anna"]["actions"], by["anna"]["score"]), ("partly", 31, 5))
+        self.assertEqual([i["title"] for i in by["noah"]["ideas"]], ["Skip the tour"])
+        self.assertEqual(by["anna"]["ideas"][0]["area"], "onboarding")
+
+    def test_walkthrough_and_improvements_come_before_the_issues(self):
+        findings, scores = summarize.load(self.tmp.name)
+        md = summarize.render(findings, scores, summarize.group_by_title(findings), False, ([], ""), self.rows)
+        self.assertTrue(md.startswith("# Agent test summary\n\n## Walkthrough\n"))
+        self.assertIn("Goal reached: yes for 1, partly for 1, no for 0 of 2 personas. Median: 21.5 actions.", md)
+        people = [line.split(" | ")[0][2:] for line in md.splitlines() if line.startswith(("| anna", "| noah"))]
+        self.assertEqual(people, ["noah", "anna"])
+        self.assertIn("3 suggestions from 2 personas.", md)
+        self.assertIn("| onboarding | 2 | 2 (anna, noah) |", md)
+        ideas = [line for line in md.splitlines() if line.startswith(("| high", "| medium", "| low"))]
+        self.assertEqual(ideas[0], "| high | onboarding | Say why the app needs all files | anna "
+                                   "| Permissions (04, 05) | I almost \\| gave up |")
+        self.assertEqual([i.split(" | ")[0] for i in ideas], ["| high", "| medium", "| low"])
+        self.assertLess(md.index("## Improvements"), md.index("## Issues"))
+        self.assertIn("| cosmetic | Typo on home | 1 (noah) | Home |", md)
+
+    def test_a_normal_run_is_unchanged(self):
+        with tempfile.TemporaryDirectory() as d:
+            write_run(d, FINDINGS)
+            rows = summarize.load_walkthrough(d)
+            findings, scores = summarize.load(d)
+            md = summarize.render(findings, scores, summarize.group_by_title(findings), False, ([], ""), rows)
+        self.assertEqual(rows, [])
+        self.assertNotIn("Walkthrough", md)
+        self.assertNotIn("## Issues", md)
+
+    def test_command_line_with_no_issues(self):
+        with tempfile.TemporaryDirectory() as d:
+            write_run(d, {"olga": {"score": 9, "goal_reached": "yes", "actions": 8, "issues": [],
+                                   "improvements": [{"title": "Dark mode", "area": "layout", "impact": "low"}]}})
+            out = subprocess.run([sys.executable, str(ROOT / "scripts/summarize.py"), d],
+                                 env=dict(os.environ, SUMMARY_GROUPING="0"), capture_output=True, text=True)
+        self.assertEqual(out.returncode, 0, out.stderr)
+        self.assertIn("| low | layout | Dark mode | olga |", out.stdout)
+        self.assertTrue(out.stdout.endswith("## Issues\n\nNo issues reported.\n"))
+
+
 if __name__ == "__main__":
     unittest.main()
