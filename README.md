@@ -26,6 +26,19 @@ Claude subscription or API key: about $0.15 to $0.55 per phone in [these runs](d
 ![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-orange)
 [![Last commit](https://img.shields.io/github/last-commit/pierridotite/mobile-agent-testers)](https://github.com/pierridotite/mobile-agent-testers/commits/main)
 
+## Not just accessibility
+
+Large text makes the most striking screenshots, but it is a small part of what the agents report. Each persona has a goal ("finish one task without English", "fill every text field with Turkish characters, emoji and very long text", "leave the app in the middle of it, then come back") and tries to reach it like a new user, so the agents report whatever gets in the way:
+
+- **Broken flows and silent failures**: a device list that loads forever and never says nothing was found (12 of 20 phones), a failed send that only says "Error", a dialog that waits forever when an address doesn't answer, a text dialog that throws away what you typed after one stray tap.
+- **Onboarding and permissions**: AnkiDroid blocks setup until you grant all-files access on a system page, with no explanation (8 of its 10 agents).
+- **Translations**: "Get started" left in English on Portuguese, Spanish and Japanese phones, the # tab labelled "Jogo da velha" (tic-tac-toe) in Portuguese, sizes written "B 14" in Arabic, ISO dates instead of the phone's format, a privacy policy only in English.
+- **Copy**: a typo in Flutter's official sample, a text message counted as "Files: 1", "#16 #15" on the home screen with no explanation.
+- **Devices**: tablets that show the phone layout in a narrow column, the keyboard over Cancel and Confirm, the Android navigation bar over the last items of a list, an app that ignores dark mode.
+- **Data**: nothing kept after a relaunch (in the demo app).
+
+On LocalSend, 34 of the 46 bugs had nothing to do with text size or accessibility. Every report also ends with the persona's opinion and a score out of 10 (would they keep the app?), so a run shows where new users get lost, not only what is broken. To send all 20 at one flow, such as a new onboarding or a checkout, write your own brief, like [the one for AnkiDroid](briefs/ankidroid.md).
+
 ## Real findings
 
 ### LocalSend: 20 agents, 20 devices, 14 languages
@@ -105,7 +118,7 @@ They run the tests you write. These agents look for what nobody thought to test.
 | | mobile-agent-testers | Maestro, Appium, Detox, e2e |
 |---|---|---|
 | You write | Nothing: pick personas from the list | Flows or test code |
-| It catches | Layout at large text, dark mode, confusing copy, dead ends | What each test checks |
+| It catches | Broken flows, silent errors, missing translations, layout at large text, dark mode, confusing copy | What each test checks |
 | Same result every run | No: each run explores, so check the screenshots | Yes |
 
 [agent-device](https://github.com/callstackincubator/agent-device) gives one coding agent hands on one simulator. This runs a whole session: it builds the app, gives each persona its own device and collects encrypted reports. Use agents before a release, and scripted flows for regressions.

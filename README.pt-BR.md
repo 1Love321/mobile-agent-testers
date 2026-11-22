@@ -27,6 +27,19 @@ Claude ou chave de API: de US$ 0,15 a US$ 0,55 por celular [nestas execuções](
 ![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-orange)
 [![Last commit](https://img.shields.io/github/last-commit/pierridotite/mobile-agent-testers)](https://github.com/pierridotite/mobile-agent-testers/commits/main)
 
+## Não é só acessibilidade
+
+Texto grande rende as capturas mais chamativas, mas é uma parte pequena do que os agentes relatam. Cada persona tem um objetivo ("terminar uma tarefa sem inglês", "preencher cada campo de texto com caracteres turcos, emojis e textos muito longos", "sair do app no meio e voltar depois") e tenta chegar lá como um usuário novo, então os agentes relatam tudo o que atrapalha:
+
+- **Fluxos quebrados e falhas silenciosas**: uma lista de dispositivos que carrega para sempre e nunca diz que não achou nenhum (12 de 20 celulares), um envio que falha e só diz "Error", um diálogo que espera para sempre quando um endereço não responde, um diálogo de texto que descarta o que você digitou depois de um único toque fora.
+- **Onboarding e permissões**: o AnkiDroid bloqueia a configuração até você liberar o acesso a todos os arquivos numa tela do sistema, sem nenhuma explicação (8 dos seus 10 agentes).
+- **Traduções**: "Get started" em inglês em celulares em português, espanhol e japonês, a aba # chamada "Jogo da velha" em português, tamanhos escritos "B 14" em árabe, datas no formato ISO em vez do formato do celular, uma política de privacidade só em inglês.
+- **Textos**: um erro de digitação no exemplo oficial do Flutter, uma mensagem de texto contada como "Files: 1", "#16 #15" na tela inicial sem explicação.
+- **Dispositivos**: tablets que mostram o layout de celular numa coluna estreita, o teclado por cima de Cancelar e Confirmar, a barra de navegação do Android por cima dos últimos itens de uma lista, um app que ignora o modo escuro.
+- **Dados**: nada salvo depois de reabrir o app (no app de demo).
+
+No LocalSend, 34 dos 46 bugs não tinham nada a ver com tamanho de texto nem com acessibilidade. Cada relatório também termina com a opinião da persona e uma nota de 0 a 10 (ela continuaria com o app?), então uma execução mostra onde os usuários novos se perdem, não só o que está quebrado. Para mandar os 20 para um único fluxo, como um novo onboarding ou um checkout, escreva o seu próprio brief, como [o do AnkiDroid](briefs/ankidroid.md).
+
 ## Bugs reais encontrados
 
 ### LocalSend: 20 agentes, 20 aparelhos, 14 idiomas
@@ -106,7 +119,7 @@ Eles rodam os testes que você escreve. Estes agentes procuram o que ninguém pe
 | | mobile-agent-testers | Maestro, Appium, Detox, e2e |
 |---|---|---|
 | Você escreve | Nada: escolhe personas da lista | Fluxos ou código de teste |
-| Ele pega | Layout com texto grande, modo escuro, textos confusos, becos sem saída | O que cada teste verifica |
+| Ele pega | Fluxos quebrados, erros silenciosos, textos sem tradução, layout com texto grande, modo escuro, textos confusos | O que cada teste verifica |
 | Mesmo resultado a cada execução | Não: cada execução explora, então confira as capturas | Sim |
 
 O [agent-device](https://github.com/callstackincubator/agent-device) dá a um agente de programação o controle de um simulador. Este projeto roda uma sessão inteira: faz o build do app, dá a cada persona seu próprio aparelho e junta relatórios criptografados. Use agentes antes de uma versão e fluxos com script para regressões.
