@@ -1,5 +1,7 @@
 # mobile-agent-testers
 
+<a href="https://www.producthunt.com/posts/mobile-agent-testers?utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=mobile-agent-testers"><picture><source media="(prefers-color-scheme: dark)" srcset="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1326513&amp;theme=dark"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1326513&amp;theme=light" alt="Mobile Agent Testers on Product Hunt" width="250" height="54"></picture></a>
+
 **20 AI testers on 20 different phones, in parallel, on GitHub's free runners.**
 
 **[Examples](docs/examples.md)** · **[Compare](docs/compare.md)** · **[FAQ](#faq)** · **[Personas](personas.json)** · **[Releases](https://github.com/pierridotite/mobile-agent-testers/releases)**

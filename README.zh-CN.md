@@ -1,5 +1,7 @@
 # mobile-agent-testers
 
+<a href="https://www.producthunt.com/posts/mobile-agent-testers?utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=mobile-agent-testers"><picture><source media="(prefers-color-scheme: dark)" srcset="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1326513&amp;theme=dark"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1326513&amp;theme=light" alt="Mobile Agent Testers on Product Hunt" width="250" height="54"></picture></a>
+
 **20 个 AI 测试员，20 台不同的手机，在 GitHub 的免费运行器上并行测试。**
 
 **[应用实例](docs/examples.zh-CN.md)** · **[对比](docs/compare.md)** · **[常见问题](#常见问题)** · **[角色](personas.json)** · **[版本](https://github.com/pierridotite/mobile-agent-testers/releases)**
