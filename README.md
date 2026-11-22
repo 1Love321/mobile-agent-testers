@@ -1,6 +1,6 @@
 # mobile-agent-testers
 
-**20 AI testers on 20 different phones, in parallel, for $0.**
+**20 AI testers on 20 different phones, in parallel, on GitHub's free runners.**
 
 **[Runs](docs/runs/)** · **[Compare](docs/compare.md)** · **[FAQ](#faq)** · **[Personas](personas.json)** · **[Releases](https://github.com/pierridotite/mobile-agent-testers/releases)**
 
@@ -12,6 +12,9 @@ in Swedish at the largest text size, Pixel 7 at 200%, iPad in German, Arabic
 right to left...), uses your app like a new user and writes a bug report with
 screenshots. Flutter, React Native, Expo, native Kotlin and Swift, Kotlin
 Multiplatform, Capacitor and .NET MAUI.
+
+GitHub's runners are free for public repos. You only pay for the model, with your
+Claude subscription or API key: about $0.15 to $0.55 per phone in [these runs](docs/runs/).
 
 <p align="center"><a href="assets/localsend-20.mp4"><img src="assets/localsend-20.gif" alt="Real screen recordings of 20 AI testers using LocalSend at the same time: 10 Android emulators and 10 iOS Simulators in 14 languages, from a small Pixel to a 13-inch iPad. When a tester finishes, its phone shows how many issues it found. Opens the video." width="100%"></a><br>
 <sub>Real screen recordings of the LocalSend run, idle time cut. <a href="assets/localsend-20.mp4">Full video (MP4)</a> · <a href="docs/runs/localsend-20.md">The run, device by device</a></sub></p>

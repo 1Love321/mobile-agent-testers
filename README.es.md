@@ -1,6 +1,6 @@
 # mobile-agent-testers
 
-**20 testers con IA en 20 teléfonos distintos, en paralelo, por 0 $.**
+**20 testers con IA en 20 teléfonos distintos, en paralelo, en los runners gratuitos de GitHub.**
 
 **[Ejecuciones](docs/runs/)** · **[Comparativa](docs/compare.md)** · **[Preguntas frecuentes](#preguntas-frecuentes)** · **[Personas](personas.json)** · **[Versiones](https://github.com/pierridotite/mobile-agent-testers/releases)**
 
@@ -13,6 +13,9 @@ o emulador de Android en GitHub Actions. Interpreta una persona (iPhone SE en su
 Pixel 7 al 200 %, iPad en alemán, árabe de derecha a izquierda...), usa tu app como un usuario nuevo y escribe
 un informe de errores con capturas. Flutter, React Native, Expo, Kotlin y Swift nativos, Kotlin
 Multiplatform, Capacitor y .NET MAUI.
+
+Los runners de GitHub son gratuitos para repos públicos. Solo pagas el modelo, con tu suscripción de Claude
+o tu clave de API: entre 0,15 y 0,55 $ por teléfono en [estas ejecuciones](docs/runs/).
 
 <p align="center"><a href="assets/localsend-20.mp4"><img src="assets/localsend-20.gif" alt="Grabaciones de pantalla reales de 20 testers con IA usando LocalSend a la vez: 10 emuladores de Android y 10 simuladores de iOS en 14 idiomas, desde un Pixel pequeño hasta un iPad de 13 pulgadas. Cuando un tester termina, su teléfono muestra cuántos problemas encontró. Abre el vídeo." width="100%"></a><br>
 <sub>Grabaciones de pantalla reales de la ejecución en LocalSend, sin los tiempos muertos. <a href="assets/localsend-20.mp4">Vídeo completo (MP4)</a> · <a href="docs/runs/localsend-20.md">La ejecución, dispositivo por dispositivo</a></sub></p>

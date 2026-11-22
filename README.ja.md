@@ -1,6 +1,6 @@
 # mobile-agent-testers
 
-**20 人の AI テスターが、20 台の異なるスマートフォンで、同時に、0 ドルで。**
+**20 人の AI テスターが、20 台の異なるスマートフォンで、GitHub の無料ランナー上で同時にテスト。**
 
 **[実行記録](docs/runs/)** · **[比較](docs/compare.md)** · **[よくある質問](#よくある質問)** · **[ペルソナ](personas.json)** · **[リリース](https://github.com/pierridotite/mobile-agent-testers/releases)**
 
@@ -13,6 +13,9 @@
 iPhone SE、フォント 200% の Pixel 7、ドイツ語の iPad、右から左に読むアラビア語……）を演じ、新しいユーザーとして
 アプリを使い、スクリーンショット付きのバグレポートを書きます。Flutter、React Native、Expo、ネイティブの Kotlin と
 Swift、Kotlin Multiplatform、Capacitor、.NET MAUI に対応しています。
+
+公開リポジトリなら GitHub のランナーは無料です。費用はモデルの利用料だけで、Claude のサブスクリプションか
+API キーを使います。[これまでの実行](docs/runs/)では 1 台あたり約 0.15〜0.55 ドルでした。
 
 <p align="center"><a href="assets/localsend-20.mp4"><img src="assets/localsend-20.gif" alt="20 人の AI テスターが同時に LocalSend を使う実際の画面録画：Android エミュレーター 10 台と iOS シミュレーター 10 台、14 言語、小さな Pixel から 13 インチの iPad まで。テスターが終わると、その端末に見つけた問題の数が表示されます。クリックで動画を開きます。" width="100%"></a><br>
 <sub>LocalSend での実行の実際の画面録画（待ち時間はカット）。<a href="assets/localsend-20.mp4">動画全体（MP4）</a> · <a href="docs/runs/localsend-20.md">端末ごとの実行記録</a></sub></p>

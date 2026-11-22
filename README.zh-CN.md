@@ -1,6 +1,6 @@
 # mobile-agent-testers
 
-**20 个 AI 测试员，20 台不同的手机，并行运行，花费 0 美元。**
+**20 个 AI 测试员，20 台不同的手机，在 GitHub 的免费运行器上并行测试。**
 
 **[运行记录](docs/runs/)** · **[对比](docs/compare.md)** · **[常见问题](#常见问题)** · **[角色](personas.json)** · **[版本](https://github.com/pierridotite/mobile-agent-testers/releases)**
 
@@ -12,6 +12,9 @@
 模拟器或 Android 模拟器。它扮演一个角色（瑞典语、最大字号的 iPhone SE，字体 200% 的 Pixel 7，
 德语 iPad，从右到左的阿拉伯语……），像新用户一样使用你的应用，并写出带截图的缺陷报告。
 支持 Flutter、React Native、Expo、原生 Kotlin 和 Swift、Kotlin Multiplatform、Capacitor 和 .NET MAUI。
+
+公开仓库使用 GitHub 的运行器是免费的。你只需要为模型付费，用你的 Claude 订阅或 API key：
+在[这几次运行](docs/runs/)中，每台手机大约 0.15 到 0.55 美元。
 
 <p align="center"><a href="assets/localsend-20.mp4"><img src="assets/localsend-20.gif" alt="20 个 AI 测试员同时使用 LocalSend 的真实录屏：10 台 Android 模拟器和 10 台 iOS 模拟器，14 种语言，从小屏 Pixel 到 13 英寸 iPad。测试员完成后，手机上会显示它发现的问题数量。点击打开视频。" width="100%"></a><br>
 <sub>LocalSend 那次运行的真实录屏，已剪掉空闲时间。<a href="assets/localsend-20.mp4">完整视频（MP4）</a> · <a href="docs/runs/localsend-20.md">逐台设备查看这次运行</a></sub></p>
