@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Builds an iOS Simulator .app (arm64, unsigned) for any supported framework.
 # Usage: bash scripts/build/ios.sh <app dir> <framework|auto>
-# Env (optional): BUILD_COMMAND + ARTIFACT (custom build or prebuilt .app), IOS_SCHEME
+# Env (optional): BUILD_COMMAND + ARTIFACT (custom build or prebuilt .app), IOS_SCHEME,
+#   BUILD_ARGS / BUILD_ARGS_SECRET (extra arguments for the automatic build: scripts/build/args.sh)
 # Output: $GITHUB_WORKSPACE/app-ios.tgz. All tool output goes to results/build-ios.log
 set -uo pipefail
 ROOT=${GITHUB_WORKSPACE:-$PWD}; mkdir -p "$ROOT/results"; LOG="$ROOT/results/build-ios.log"
@@ -26,17 +27,19 @@ print(base if base in sc else sc[0])" "$c")}
   echo "Scheme: $s"
   q xcodebuild "$@" -scheme "$s" -configuration "${IOS_CONFIGURATION:-Release}" -sdk iphonesimulator \
     -destination 'generic/platform=iOS Simulator' -derivedDataPath "$RUNNER_TEMP/dd" \
-    EXCLUDED_ARCHS=x86_64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build || fail
+    EXCLUDED_ARCHS=x86_64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO ${BUILD_ARGV[@]+"${BUILD_ARGV[@]}"} build || fail
   OUT=$(find "$RUNNER_TEMP/dd/Build/Products" -maxdepth 2 -path '*iphonesimulator/*.app' -not -name '*Tests*' | head -1)
 }
 
+. "$ROOT/scripts/build/args.sh"; BUILD_ARGV=()
 if [ -n "${BUILD_COMMAND:-}" ]; then
+  [ -n "${BUILD_ARGS:-}${BUILD_ARGS_SECRET:-}" ] && echo "::warning::build_args is ignored with a custom ios_build command"
   FW=custom; q bash -c "$BUILD_COMMAND" || fail; OUT=${ARTIFACT:?ARTIFACT (path of the .app) is required with BUILD_COMMAND}
-else case "$FW" in
+else build_args || exit 1; case "$FW" in
   flutter)
     . "$ROOT/scripts/build/flutter_sdk.sh"; flutter_sdk || fail
     # Flutter only builds debug for the Simulator; it runs standalone there
-    q flutter pub get && q flutter build ios --simulator --debug || fail
+    q flutter pub get && q flutter build ios --simulator --debug ${BUILD_ARGV[@]+"${BUILD_ARGV[@]}"} || fail
     OUT=$(find build/ios/iphonesimulator -maxdepth 1 -name '*.app' | head -1) ;;
   expo)
     npm_install; q env CI=1 npx expo prebuild --platform ios --no-install || fail
@@ -48,7 +51,7 @@ else case "$FW" in
     [ -f ios/App/Podfile ] && (cd ios/App && q pod install); xcbuild ios/App ;;
   maui)
     TF=$(grep -ohE 'net[0-9.]+-ios' ./*.csproj | head -1)
-    q dotnet workload install maui-ios && q dotnet build -f "$TF" -c Debug -p:RuntimeIdentifier=iossimulator-arm64 || fail
+    q dotnet workload install maui-ios && q dotnet build -f "$TF" -c Debug -p:RuntimeIdentifier=iossimulator-arm64 ${BUILD_ARGV[@]+"${BUILD_ARGV[@]}"} || fail
     OUT=$(find bin -path '*iossimulator-arm64*' -name '*.app' -maxdepth 6 | head -1) ;;
   kmp)
     xcbuild "$(dirname "$(find . -maxdepth 3 -name '*.xcodeproj' -not -path '*/Pods/*' | head -1)")" ;;

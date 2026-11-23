@@ -35,6 +35,9 @@ on:
       ios_app_path:
         description: Path of the Simulator .app produced by ios_build
         default: ""
+      build_args:
+        description: "Extra arguments for the automatic build, both platforms: --dart-define=API_URL=https://... for Flutter, Gradle and xcodebuild arguments for the others. Public on a public repo: put keys in the BUILD_ARGS secret"
+        default: ""
       source_repo:
         description: owner/name of the app repo (empty = this repo)
         default: ""
@@ -115,6 +118,8 @@ jobs:
         env:
           APP_DIR: ${{ inputs.source_repo != '' && format('src/{0}', inputs.app_dir) || inputs.app_dir }}
           BUILD_COMMAND: ${{ inputs.android_build }}
+          BUILD_ARGS: ${{ inputs.build_args }}
+          BUILD_ARGS_SECRET: ${{ secrets.BUILD_ARGS }}
           ARTIFACT: ${{ inputs.apk_path }}
         run: bash scripts/build/android.sh "$APP_DIR" "${{ inputs.framework }}"
       - name: Encrypt APK
@@ -161,6 +166,8 @@ jobs:
         env:
           APP_DIR: ${{ inputs.source_repo != '' && format('src/{0}', inputs.app_dir) || inputs.app_dir }}
           BUILD_COMMAND: ${{ inputs.ios_build }}
+          BUILD_ARGS: ${{ inputs.build_args }}
+          BUILD_ARGS_SECRET: ${{ secrets.BUILD_ARGS }}
           ARTIFACT: ${{ inputs.ios_app_path }}
           IOS_SCHEME: ${{ vars.IOS_SCHEME }}   # optional repo variable, for projects with several schemes
         run: bash scripts/build/ios.sh "$APP_DIR" "${{ inputs.framework }}"

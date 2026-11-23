@@ -69,7 +69,9 @@ React Native, Capacitor/Ionic, Kotlin Multiplatform, native Kotlin/Java and
 Swift/Objective-C, .NET MAUI (beta). Force it with `-f framework=<name>` if
 detection is wrong. For anything else, or to test an app that is already
 built, set `android_build` + `apk_path` and `ios_build` + `ios_app_path`
-(a build command or a download; paths relative to `app_dir`). For a native
+(a build command or a download; paths relative to `app_dir`). If the automatic
+build only needs extra arguments, like Flutter's `--dart-define=API_URL=...`, put them
+in `-f build_args=...`, and keys in a `BUILD_ARGS` secret (run inputs are public). For a native
 iOS project with several schemes, set the repo variable: `gh variable set IOS_SCHEME --body <scheme>`.
 
 ## 4. Personas and brief

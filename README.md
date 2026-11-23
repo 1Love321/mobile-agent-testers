@@ -101,6 +101,7 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 | `model`, `llm_base_url` | `sonnet` by default, `haiku` to spend less, or any Anthropic-compatible API with its key in an `LLM_API_KEY` secret ([docs/cheaper-models.md](docs/cheaper-models.md)) |
 | `framework` | `auto` (default) or force one of the frameworks below |
 | `android_build` + `apk_path`, `ios_build` + `ios_app_path` | Your own build command, or a download of a prebuilt app (paths relative to `app_dir`) |
+| `build_args` | Extra arguments for the automatic build of both platforms, like `--dart-define=API_URL=https://staging.example.com` for Flutter (Gradle and xcodebuild arguments for the others). Keys go in a `BUILD_ARGS` secret: run inputs are public on a public repo |
 | `block_hosts` | Analytics hosts blocked during tests |
 | `record_video` | Screen recording of each phone, encrypted with the reports |
 
