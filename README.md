@@ -176,6 +176,12 @@ Yes. A persona is a few lines in [personas.json](personas.json): device, OS vers
 
 It sometimes misreads a screen: 3 of LocalSend's 20 agents flagged the Simulator's English keyboard as part of the app. A few minutes per agent covers the main paths, not every corner of a big app. Every finding comes with numbered screenshots, so check them before filing anything.
 
+## Hosted version for teams (exploring)
+
+The workflow here stays free, open source and complete. I'm exploring a hosted version for teams with private apps: macOS runners included (on a private repo, GitHub counts each macOS minute ten times) and a web dashboard to share the reports with the whole team, product managers included.
+
+Would that help your team? [Answer three questions](https://github.com/pierridotite/mobile-agent-testers/issues/new?template=teams.yml) or [write to me on LinkedIn](https://www.linkedin.com/in/pierre-raffalli/). Already ran it on your app? [Tell me what it found and what got in the way](https://github.com/pierridotite/mobile-agent-testers/issues/new?template=usage-feedback.yml).
+
 ## Star history
 
 [![Star History Chart](https://api.star-history.com/svg?repos=pierridotite/mobile-agent-testers&type=Date)](https://star-history.com/#pierridotite/mobile-agent-testers&Date)

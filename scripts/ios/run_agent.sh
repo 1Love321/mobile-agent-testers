@@ -35,6 +35,7 @@ claude -p "Read $BRIEF and personas.json, then do the mission until the final re
   --allowedTools "Bash(bash scripts/ios/gesture.sh:*),Bash(python3 scripts/ios/screen.py:*),Bash(python3 scripts/ios/type.py:*),Bash(sleep:*),Bash(ls:*),Bash(cat:*),Bash(mkdir:*),Read,Write,Edit" \
   > results/agent-output.json 2> results/agent-errors.txt
 CODE=$?
+python3 scripts/agent_status.py results/agent-output.json results/agent-errors.txt "$PERSONA" || true
 if [ -n "$REC" ]; then
   kill -INT "$REC" 2>/dev/null
   for _ in $(seq 1 30); do kill -0 "$REC" 2>/dev/null || break; sleep 1; done

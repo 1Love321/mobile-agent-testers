@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **How each agent ended, on the run page**: finished, out of turns, usage limit, refused token or key, no API credit, rate limit or overloaded API, as an annotation with what to do next, plus turns and cost in the job summary. Nothing the agent wrote is printed, since public logs are public. `collect.sh` prints the same line for each agent ([scripts/agent_status.py](scripts/agent_status.py)).
+- **setup.sh**: asks again after an empty paste or a wrong choice, checks an API key with Anthropic before saving it (a free call, the key never on the command line), warns when a token does not look like one and when the repo is private, where macOS minutes count ten times. `setup.ps1` does the same, except the online check.
+- **Feedback**: issue forms to share how a run went on your app, and three questions about a hosted version for teams.
 - **Cheaper models**: `model=haiku`, or any Anthropic-compatible API (OpenRouter, DeepSeek, Kimi, GLM, MiniMax, Qwen) with the new `llm_base_url` input and an `LLM_API_KEY` secret ([scripts/llm_env.sh](scripts/llm_env.sh)). The findings depend on how well the model reads screenshots and reasons: [docs/cheaper-models.md](docs/cheaper-models.md).
 - **Improvement report**: with [briefs/improve.md](briefs/improve.md), each persona uses the app once to reach its goal, then lists what to change first, by area and impact. SUMMARY.md starts with the goals reached, the actions and the scores, then the improvements.
 - **Compare two versions**: `scripts/compare.py` puts two runs of the same personas side by side (two branches, two builds): goals reached, actions, scores, issues seen on one version only, improvements by area ([docs/compare-versions.md](docs/compare-versions.md)).

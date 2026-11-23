@@ -13,6 +13,7 @@ for key in "$OUT"/enc/*/*.key.bin; do
   pass=$(openssl pkeyutl -decrypt -inkey "$PRIV" -pkeyopt rsa_padding_mode:oaep -in "$key")
   mkdir -p "$OUT/$name"
   openssl enc -d -aes-256-cbc -pbkdf2 -in "$dir/$name.tgz.enc" -pass "pass:$pass" | tar xz -C "$OUT/$name"
-  grep -l "hit your" "$OUT/$name"/results/agent-output.json 2>/dev/null && echo "WARNING: $name stopped on a usage limit"
+  python3 "$(dirname "$0")/agent_status.py" "$OUT/$name/results/agent-output.json" "$OUT/$name/results/agent-errors.txt" "$name" || true
 done
 python3 "$(dirname "$0")/summarize.py" "$OUT" > "$OUT/SUMMARY.md" && echo "Summary: $OUT/SUMMARY.md"
+echo "How did it go? Tell us what it found, or where it got in the way: https://github.com/pierridotite/mobile-agent-testers/issues/new?template=usage-feedback.yml"

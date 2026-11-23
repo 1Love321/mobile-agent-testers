@@ -175,6 +175,12 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 
 画面を読み違えることがあります：LocalSend では 20 のエージェントのうち 3 つが、シミュレーターの英語キーボードをアプリの一部だと報告しました。エージェントごとの探索は数分なので、主な操作の流れはカバーしても、大きなアプリの隅々まではカバーしません。どの指摘にも番号付きのスクリーンショットが付くので、報告する前に確認してください。
 
+## チーム向けホスト版（検討中）
+
+このワークフローは今後も無料・オープンソースのまま、機能もすべてそろっています。非公開アプリを持つチーム向けに、ホスト版を検討しています。macOS ランナー込み（非公開リポジトリでは、GitHub は macOS の 1 分を 10 分として数えます）で、レポートをプロダクトマネージャーも含めたチーム全員と共有できる Web ダッシュボード付きです。
+
+チームの役に立ちそうですか？ [3 つの質問に答える](https://github.com/pierridotite/mobile-agent-testers/issues/new?template=teams.yml)か、[LinkedIn で連絡してください](https://www.linkedin.com/in/pierre-raffalli/)。もう自分のアプリで試しましたか？ [見つかったことと、つまずいたところを教えてください](https://github.com/pierridotite/mobile-agent-testers/issues/new?template=usage-feedback.yml)。
+
 ## スターの推移
 
 [![Star History Chart](https://api.star-history.com/svg?repos=pierridotite/mobile-agent-testers&type=Date)](https://star-history.com/#pierridotite/mobile-agent-testers&Date)

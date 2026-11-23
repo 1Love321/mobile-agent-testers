@@ -177,6 +177,12 @@ Sim. Uma persona são algumas linhas no [personas.json](personas.json): aparelho
 
 Às vezes lê uma tela errado: 3 dos 20 agentes do LocalSend apontaram o teclado em inglês do simulador como parte do app. Alguns minutos por agente cobrem os caminhos principais, não cada canto de um app grande. Cada bug relatado vem com capturas numeradas, então confira antes de abrir qualquer issue.
 
+## Versão hospedada para equipes (em estudo)
+
+O fluxo deste repositório continua gratuito, de código aberto e completo. Estou estudando uma versão hospedada para equipes com apps privados: runners macOS incluídos (num repositório privado, o GitHub conta cada minuto de macOS dez vezes) e um painel web para compartilhar os relatórios com a equipe toda, product managers incluídos.
+
+Isso ajudaria a sua equipe? [Responda três perguntas](https://github.com/pierridotite/mobile-agent-testers/issues/new?template=teams.yml) ou [fale comigo no LinkedIn](https://www.linkedin.com/in/pierre-raffalli/). Já rodou no seu app? [Conte o que ele encontrou e o que atrapalhou](https://github.com/pierridotite/mobile-agent-testers/issues/new?template=usage-feedback.yml).
+
 ## Histórico de estrelas
 
 [![Star History Chart](https://api.star-history.com/svg?repos=pierridotite/mobile-agent-testers&type=Date)](https://star-history.com/#pierridotite/mobile-agent-testers&Date)

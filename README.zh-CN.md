@@ -174,6 +174,12 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 
 它有时会看错屏幕：LocalSend 的 20 个智能体中有 3 个把模拟器的英文键盘当成了应用的一部分。每个智能体只探索几分钟，覆盖主要路径，而不是大型应用的每个角落。每个发现都附带编号截图，提交之前请先核对。
 
+## 团队托管版（探索中）
+
+这里的工作流会一直免费、开源、完整。我正在探索一个面向私有应用团队的托管版：包含 macOS 运行器（在私有仓库里，GitHub 把 macOS 的每一分钟按十分钟计算），以及一个网页面板，方便把报告分享给整个团队，包括产品经理。
+
+对你的团队有用吗？[回答三个问题](https://github.com/pierridotite/mobile-agent-testers/issues/new?template=teams.yml)，或[在 LinkedIn 上联系我](https://www.linkedin.com/in/pierre-raffalli/)。已经在你的应用上跑过了？[告诉我它发现了什么、哪里卡住了](https://github.com/pierridotite/mobile-agent-testers/issues/new?template=usage-feedback.yml)。
+
 ## Star 历史
 
 [![Star History Chart](https://api.star-history.com/svg?repos=pierridotite/mobile-agent-testers&type=Date)](https://star-history.com/#pierridotite/mobile-agent-testers&Date)

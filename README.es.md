@@ -177,6 +177,12 @@ Sí. Una persona son unas pocas líneas en [personas.json](personas.json): dispo
 
 A veces interpreta mal una pantalla: 3 de los 20 agentes de LocalSend señalaron el teclado en inglés del simulador como parte de la app. Unos minutos por agente cubren los caminos principales, no cada rincón de una app grande. Cada hallazgo viene con capturas numeradas, así que revísalas antes de reportar nada.
 
+## Versión alojada para equipos (en estudio)
+
+El flujo de este repo sigue siendo gratis, de código abierto y completo. Estoy estudiando una versión alojada para equipos con apps privadas: runners de macOS incluidos (en un repo privado, GitHub cuenta cada minuto de macOS diez veces) y un panel web para compartir los informes con todo el equipo, product managers incluidos.
+
+¿Le serviría a tu equipo? [Responde tres preguntas](https://github.com/pierridotite/mobile-agent-testers/issues/new?template=teams.yml) o [escríbeme por LinkedIn](https://www.linkedin.com/in/pierre-raffalli/). ¿Ya lo probaste con tu app? [Cuéntame qué encontró y qué te frenó](https://github.com/pierridotite/mobile-agent-testers/issues/new?template=usage-feedback.yml).
+
 ## Historial de estrellas
 
 [![Star History Chart](https://api.star-history.com/svg?repos=pierridotite/mobile-agent-testers&type=Date)](https://star-history.com/#pierridotite/mobile-agent-testers&Date)
