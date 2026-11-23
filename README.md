@@ -7,7 +7,7 @@
 
 **20 AI testers on 20 different phones, in parallel, on GitHub's free runners.**
 
-**[Examples](docs/examples.md)** · **[Compare](docs/compare.md)** · **[FAQ](#faq)** · **[Personas](personas.json)** · **[Releases](https://github.com/pierridotite/mobile-agent-testers/releases)**
+**[Examples](docs/examples.md)** · **[Compare](docs/compare.md)** · **[FAQ](#faq)** · **[Personas](personas.json)** · **[Contributing](CONTRIBUTING.md)** · **[Releases](https://github.com/pierridotite/mobile-agent-testers/releases)**
 
 English · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · [Português](README.pt-BR.md)
 
@@ -178,6 +178,20 @@ Yes. A persona is a few lines in [personas.json](personas.json): device, OS vers
 ### What does it get wrong?
 
 It sometimes misreads a screen: 3 of LocalSend's 20 agents flagged the Simulator's English keyboard as part of the app. A few minutes per agent covers the main paths, not every corner of a big app. Every finding comes with numbered screenshots, so check them before filing anything.
+
+## Contributing
+
+Ideas where help is welcome. Open an issue first to say which one you take, so two people don't build the same thing. [CONTRIBUTING.md](CONTRIBUTING.md) says where each one starts and how to test it offline.
+
+- **Other agent CLIs**: OpenCode, Codex CLI, Gemini CLI, Goose. The tools are plain scripts and the mission is a Markdown brief, so the agent is one command per platform.
+- **Web apps**: the same personas on a mobile browser with Playwright, for PWAs and mobile sites.
+- **Physical Android phones** over adb, on a self-hosted runner.
+- **New personas**: increased contrast, reduced motion, color blindness filters, a slow or flaky network.
+- **Findings to issues**: turn the summary into draft GitHub issues with their screenshots, or a Slack or Discord message.
+- **Other CI**: GitLab CI, Bitrise, Codemagic.
+- **More build systems**: NativeScript, Unity, Godot, each one case in `scripts/build/`.
+- **Translations** of the README and docs.
+- **Model comparison**: the demo app's 11 planted bugs make a small benchmark. A table of what each model finds and costs.
 
 ## Hosted version for teams (exploring)
 

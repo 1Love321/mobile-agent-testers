@@ -7,7 +7,7 @@
 
 **20 人の AI テスターが、20 台の異なるスマートフォンで、GitHub の無料ランナー上で同時にテスト。**
 
-**[適用例](docs/examples.ja.md)** · **[比較](docs/compare.md)** · **[よくある質問](#よくある質問)** · **[ペルソナ](personas.json)** · **[リリース](https://github.com/pierridotite/mobile-agent-testers/releases)**
+**[適用例](docs/examples.ja.md)** · **[比較](docs/compare.md)** · **[よくある質問](#よくある質問)** · **[ペルソナ](personas.json)** · **[コントリビュート](CONTRIBUTING.md)** · **[リリース](https://github.com/pierridotite/mobile-agent-testers/releases)**
 
 [English](README.md) · [简体中文](README.zh-CN.md) · 日本語 · [Español](README.es.md) · [Português](README.pt-BR.md)
 
@@ -177,6 +177,20 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 ### 苦手なことは？
 
 画面を読み違えることがあります：LocalSend では 20 のエージェントのうち 3 つが、シミュレーターの英語キーボードをアプリの一部だと報告しました。エージェントごとの探索は数分なので、主な操作の流れはカバーしても、大きなアプリの隅々まではカバーしません。どの指摘にも番号付きのスクリーンショットが付くので、報告する前に確認してください。
+
+## コントリビュート
+
+手伝ってもらえると嬉しいアイデアです。同じものを二人で作らないよう、着手する前に issue でどれをやるか教えてください。それぞれの始め方とオフラインでのテスト方法は [CONTRIBUTING.md](CONTRIBUTING.md) にあります。
+
+- **他のエージェント CLI**：OpenCode、Codex CLI、Gemini CLI、Goose。ツールはただのスクリプトで、ミッションは Markdown の指示書なので、エージェントはプラットフォームごとにコマンド 1 つです。
+- **Web アプリ**：Playwright でモバイルブラウザ上に同じペルソナを走らせ、PWA やモバイルサイトを試す。
+- **実機の Android**：セルフホストランナーから adb で接続。
+- **新しいペルソナ**：コントラストを上げる、視差効果を減らす、色覚フィルター、遅い・不安定なネットワーク。
+- **発見を issue に**：サマリーをスクリーンショット付きの GitHub issue の下書きや、Slack・Discord のメッセージにする。
+- **他の CI**：GitLab CI、Bitrise、Codemagic。
+- **他のビルドシステム**：NativeScript、Unity、Godot。それぞれ `scripts/build/` に case を 1 つ追加。
+- **翻訳**：README とドキュメント。
+- **モデル比較**：デモアプリに仕込んだ 11 個のバグは小さなベンチマークになります。各モデルが見つけた数とコストの表を。
 
 ## チーム向けホスト版（検討中）
 

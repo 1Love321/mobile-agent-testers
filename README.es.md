@@ -7,7 +7,7 @@
 
 **20 testers con IA en 20 teléfonos distintos, en paralelo, en los runners gratuitos de GitHub.**
 
-**[Ejemplos](docs/examples.es.md)** · **[Comparativa](docs/compare.md)** · **[Preguntas frecuentes](#preguntas-frecuentes)** · **[Personas](personas.json)** · **[Versiones](https://github.com/pierridotite/mobile-agent-testers/releases)**
+**[Ejemplos](docs/examples.es.md)** · **[Comparativa](docs/compare.md)** · **[Preguntas frecuentes](#preguntas-frecuentes)** · **[Personas](personas.json)** · **[Contribuir](CONTRIBUTING.md)** · **[Versiones](https://github.com/pierridotite/mobile-agent-testers/releases)**
 
 [English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · Español · [Português](README.pt-BR.md)
 
@@ -179,6 +179,20 @@ Sí. Una persona son unas pocas líneas en [personas.json](personas.json): dispo
 ### ¿En qué se equivoca?
 
 A veces interpreta mal una pantalla: 3 de los 20 agentes de LocalSend señalaron el teclado en inglés del simulador como parte de la app. Unos minutos por agente cubren los caminos principales, no cada rincón de una app grande. Cada hallazgo viene con capturas numeradas, así que revísalas antes de reportar nada.
+
+## Contribuir
+
+Ideas en las que se agradece ayuda. Abre primero un issue para decir cuál tomas, así dos personas no construyen lo mismo. [CONTRIBUTING.md](CONTRIBUTING.md) explica por dónde empieza cada una y cómo probarla sin conexión.
+
+- **Otros CLI de agentes**: OpenCode, Codex CLI, Gemini CLI, Goose. Las herramientas son scripts normales y la misión es un brief en Markdown, así que el agente es un solo comando por plataforma.
+- **Apps web**: las mismas personas en un navegador móvil con Playwright, para PWA y sitios móviles.
+- **Teléfonos Android físicos** por adb, en un runner propio.
+- **Nuevas personas**: más contraste, menos movimiento, filtros de daltonismo, una red lenta o inestable.
+- **De hallazgos a issues**: convertir el resumen en borradores de issues de GitHub con sus capturas, o en un mensaje de Slack o Discord.
+- **Otros CI**: GitLab CI, Bitrise, Codemagic.
+- **Más sistemas de compilación**: NativeScript, Unity, Godot, cada uno un caso en `scripts/build/`.
+- **Traducciones** del README y de la documentación.
+- **Comparar modelos**: los 11 bugs plantados en la app de demo forman un pequeño benchmark. Una tabla de lo que encuentra y cuesta cada modelo.
 
 ## Versión alojada para equipos (en estudio)
 

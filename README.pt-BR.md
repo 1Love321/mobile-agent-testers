@@ -7,7 +7,7 @@
 
 **20 testadores com IA em 20 celulares diferentes, em paralelo, nos runners gratuitos do GitHub.**
 
-**[Exemplos](docs/examples.pt-BR.md)** · **[Comparação](docs/compare.md)** · **[Perguntas frequentes](#perguntas-frequentes)** · **[Personas](personas.json)** · **[Versões](https://github.com/pierridotite/mobile-agent-testers/releases)**
+**[Exemplos](docs/examples.pt-BR.md)** · **[Comparação](docs/compare.md)** · **[Perguntas frequentes](#perguntas-frequentes)** · **[Personas](personas.json)** · **[Contribuir](CONTRIBUTING.md)** · **[Versões](https://github.com/pierridotite/mobile-agent-testers/releases)**
 
 [English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · Português
 
@@ -179,6 +179,20 @@ Sim. Uma persona são algumas linhas no [personas.json](personas.json): aparelho
 ### Onde ele erra?
 
 Às vezes lê uma tela errado: 3 dos 20 agentes do LocalSend apontaram o teclado em inglês do simulador como parte do app. Alguns minutos por agente cobrem os caminhos principais, não cada canto de um app grande. Cada bug relatado vem com capturas numeradas, então confira antes de abrir qualquer issue.
+
+## Contribuir
+
+Ideias em que ajuda é bem-vinda. Abra uma issue antes para dizer qual você vai pegar, assim duas pessoas não constroem a mesma coisa. O [CONTRIBUTING.md](CONTRIBUTING.md) diz por onde cada uma começa e como testar offline.
+
+- **Outros CLIs de agente**: OpenCode, Codex CLI, Gemini CLI, Goose. As ferramentas são scripts comuns e a missão é um brief em Markdown, então o agente é um único comando por plataforma.
+- **Apps web**: as mesmas personas num navegador mobile com Playwright, para PWAs e sites mobile.
+- **Celulares Android físicos** via adb, num runner próprio.
+- **Novas personas**: mais contraste, menos movimento, filtros de daltonismo, rede lenta ou instável.
+- **Achados viram issues**: transformar o resumo em rascunhos de issues do GitHub com as capturas, ou numa mensagem no Slack ou Discord.
+- **Outros CIs**: GitLab CI, Bitrise, Codemagic.
+- **Mais sistemas de build**: NativeScript, Unity, Godot, cada um um caso em `scripts/build/`.
+- **Traduções** do README e da documentação.
+- **Comparar modelos**: os 11 bugs plantados no app de demonstração formam um pequeno benchmark. Uma tabela do que cada modelo encontra e quanto custa.
 
 ## Versão hospedada para equipes (em estudo)
 

@@ -7,7 +7,7 @@
 
 **20 个 AI 测试员，20 台不同的手机，在 GitHub 的免费运行器上并行测试。**
 
-**[应用实例](docs/examples.zh-CN.md)** · **[对比](docs/compare.md)** · **[常见问题](#常见问题)** · **[角色](personas.json)** · **[版本](https://github.com/pierridotite/mobile-agent-testers/releases)**
+**[应用实例](docs/examples.zh-CN.md)** · **[对比](docs/compare.md)** · **[常见问题](#常见问题)** · **[角色](personas.json)** · **[参与贡献](CONTRIBUTING.md)** · **[版本](https://github.com/pierridotite/mobile-agent-testers/releases)**
 
 [English](README.md) · 简体中文 · [日本語](README.ja.md) · [Español](README.es.md) · [Português](README.pt-BR.md)
 
@@ -176,6 +176,20 @@ gh workflow run agent-testers.yml -f source_repo=you/app -f app_id=com.you.app \
 ### 它会出什么错？
 
 它有时会看错屏幕：LocalSend 的 20 个智能体中有 3 个把模拟器的英文键盘当成了应用的一部分。每个智能体只探索几分钟，覆盖主要路径，而不是大型应用的每个角落。每个发现都附带编号截图，提交之前请先核对。
+
+## 参与贡献
+
+以下方向欢迎帮忙。动手前先开一个 issue 说明你要做哪一项，避免两个人做同一件事。[CONTRIBUTING.md](CONTRIBUTING.md) 写明了每一项从哪里入手，以及如何离线测试。
+
+- **其他智能体 CLI**：OpenCode、Codex CLI、Gemini CLI、Goose。工具都是普通脚本，任务是一份 Markdown 说明，所以每个平台只需换一条命令。
+- **Web 应用**：用 Playwright 在手机浏览器里跑同样的角色，覆盖 PWA 和移动网站。
+- **真实 Android 手机**：在自托管 runner 上通过 adb 连接。
+- **新角色**：增强对比度、减弱动态效果、色盲滤镜、慢速或不稳定的网络。
+- **把发现变成 issue**：把汇总转成带截图的 GitHub issue 草稿，或发到 Slack、Discord。
+- **其他 CI**：GitLab CI、Bitrise、Codemagic。
+- **更多构建系统**：NativeScript、Unity、Godot，每种在 `scripts/build/` 里加一个分支。
+- **翻译** README 和文档。
+- **模型对比**：演示应用里预埋的 11 个 bug 就是一个小基准。做一张表，列出每个模型找到多少、花多少钱。
 
 ## 团队托管版（探索中）
 
